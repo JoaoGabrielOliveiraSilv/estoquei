@@ -1,5 +1,5 @@
 // Public exports for the produtos feature boundary.
-export { default as ProdutoCard } from './components/ProdutoCard'
+export { default as ProductCard } from './components/ProductCard'
 export { default as ProdutoModal } from './components/ProdutoModal'
 export { default as ProdutoStats } from './components/ProdutoStats'
 export { default as ProdutoTabela } from './components/ProdutoTabela'
