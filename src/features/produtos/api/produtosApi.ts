@@ -1,5 +1,6 @@
 // Axios functions that define the produtos API contract.
 import axios from 'axios'
+
 import type { CreateProdutoDTO, Produto } from '../types'
 
 const produtosHttp = axios.create({

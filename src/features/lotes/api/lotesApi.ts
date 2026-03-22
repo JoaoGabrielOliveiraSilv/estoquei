@@ -1,5 +1,6 @@
 // Axios functions that define the lotes API contract.
 import axios from 'axios'
+
 import type { CreateLoteDTO, Lote } from '../types'
 
 const lotesHttp = axios.create({

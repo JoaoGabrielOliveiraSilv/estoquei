@@ -1,5 +1,6 @@
 // Application route declarations with basic fallback page.
 import { Routes, Route } from 'react-router-dom'
+
 import { ProdutoTabela } from '../../features/produtos'
 
 function NotFoundPage() {

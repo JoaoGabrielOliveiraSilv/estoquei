@@ -1,5 +1,6 @@
 // Smoke test to ensure app root renders without crashing.
 import { render, screen } from '@testing-library/react'
+
 import { App } from './App'
 import { AppProviders } from './providers'
 
