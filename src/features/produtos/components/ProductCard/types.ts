@@ -1,15 +1,19 @@
 export type ProductCardStatus = 'normal' | 'warning' | 'danger'
+type StatusStyle = {
+  border: string
+  bg: string
+  textColor: string
+  dot: string
+  text: string
+}
+
+type QuantityStyle = {
+  textColor: string
+}
+
 export type ProductCardStyle = Record<ProductCardStatus, {
-  status: {
-    border: string
-    bg: string
-    textColor: string
-    dot: string
-    text: string
-  }
-  quantity: {
-    textColor: string
-  }
+  status: StatusStyle
+  quantity: QuantityStyle
 }>
 export interface IProductCardProps {
   icon: React.ReactNode
