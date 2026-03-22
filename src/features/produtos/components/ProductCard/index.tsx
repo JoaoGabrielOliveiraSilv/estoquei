@@ -3,6 +3,7 @@ import { LayersPlus, RotateCcw, SquarePen, Trash } from 'lucide-react'
 import type { IProductCardProps } from './types'
 import { cn } from '@/shared/utils/cn'
 import { variants } from './variants'
+import { DotInfo } from '@/shared/components/ui/DotInfo'
 
 export default function ProductCard({
   status,
@@ -28,16 +29,17 @@ export default function ProductCard({
         </div>
 
         {/* Status */}
-        <div
-          className={cn(
+        <DotInfo
+          dotColor={statusStyle.dot}
+          spanClassName={cn(statusStyle.textColor, 'text-xs')}
+          containerClassName={cn(
             statusStyle.bg,
             statusStyle.border,
             'flex items-center self-center gap-1 h-fit px-2 py-[3px] rounded-full border'
           )}
         >
-          <div className={cn(statusStyle.dot, 'w-2 h-2 rounded-full')} />
-          <span className={cn(statusStyle.textColor, 'text-xs')}>{statusStyle.text}</span>
-        </div>
+          {statusStyle.text}
+        </DotInfo>
       </div>
 
       <div className="flex items-center justify-between md:contents">
