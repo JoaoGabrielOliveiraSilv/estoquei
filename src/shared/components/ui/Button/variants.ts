@@ -1,0 +1,22 @@
+import { cva } from 'class-variance-authority'
+
+export const buttonVariants = cva(
+  'inline-flex items-center justify-center gap-2 rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+  {
+    variants: {
+      variant: {
+        'ghost': 'bg-estoquei-bg2 text-estoquei-text2 border border-estoquei-border hover:bg-estoquei-bg3',
+      },
+      size: {
+        icon: 'w-7 h-7',
+        sm: 'w-28 px-3 text-sm',
+        md: 'w-10 px-4 text-sm',
+        lg: 'h-12 px-6 text-base',
+      },
+    },
+    defaultVariants: {
+      variant: 'ghost',
+      size: 'icon',
+    },
+  }
+)
