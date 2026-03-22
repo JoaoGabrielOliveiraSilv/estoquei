@@ -1,0 +1,14 @@
+// Global providers used by the entire application tree.
+import type { PropsWithChildren } from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { BrowserRouter } from 'react-router-dom'
+
+const queryClient = new QueryClient()
+
+export function AppProviders({ children }: PropsWithChildren) {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>{children}</BrowserRouter>
+    </QueryClientProvider>
+  )
+}

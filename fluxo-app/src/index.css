@@ -1,0 +1,4 @@
+/* Global style entry with Tailwind directives. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
