@@ -6,7 +6,7 @@ export default function MobileFooter({ items, className }: IBottomNavProps) {
   return (
     <footer
       className={cn(
-        'fixed bottom-0 left-0 right-0 bg-estoquei-bg2 min-w-full',
+        'fixed bottom-0 left-0 right-0 bg-estoquei-bg2',
         'h-[calc(64px+var(--safe-bottom))]',
         'pb-[var(--safe-bottom)]',
         'border-t border-estoquei-border',
@@ -28,15 +28,10 @@ export default function MobileFooter({ items, className }: IBottomNavProps) {
             item.active ? 'text-estoquei-accent' : 'text-estoquei-text3'
           )}
         >
-          <item.icon
-            className={cn(
-              'w-6 h-6',
-              item.active ? 'text-estoquei-accent' : 'text-estoquei-text3'
-            )}
-          />
+          <item.icon className="w-6 h-6" />
           <span
             className={cn(
-              'text-estoquei-text3 text-xs',
+              'text-xs',
               item.active ? 'text-estoquei-accent' : 'text-estoquei-text3'
             )}
           >
