@@ -18,6 +18,6 @@ export type ProductCardStyle = Record<ProductCardStatus, {
 }>
 export interface IProductCardProps {
   product: Product
-  gridProps?: React.HTMLAttributes<HTMLDivElement>['className']
+  gridProps: React.HTMLAttributes<HTMLDivElement>['className']
   containerClassName?: React.HTMLAttributes<HTMLDivElement>['className']
 }

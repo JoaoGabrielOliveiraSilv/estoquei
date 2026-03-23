@@ -4,9 +4,9 @@ import type { IProductTableProps } from './types.ts'
 import { Input } from '@/shared/components/ui/Input.tsx'
 import { cn } from '@/shared/utils/cn.ts'
 
-export default function ProductTable({ products }: IProductTableProps) {
+export default function ProductTable({ products, ...props }: IProductTableProps) {
   return (
-    <div className="bg-estoquei-bg gap-2">
+    <div className="bg-estoquei-bg gap-2" {...props}>
       <div className="relative mb-3">
         <Search
           size={15}
