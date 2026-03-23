@@ -6,16 +6,22 @@ import { variants } from './variants'
 import { DotInfo } from '@/shared/components/ui/DotInfo'
 
 export default function ProductCard({
-  status,
-  icon,
-  title,
-  description,
-  quantity,
+  product: { icon, name, description, quantity, status },
+  gridProps,
+  containerClassName,
 }: IProductCardProps) {
   const { quantity: quantityStyle, status: statusStyle } = variants[status]
 
   return (
-    <div className="bg-estoquei-bg2 rounded-lg p-4 flex flex-col gap-3 md:flex-row md:gap-2 md:items-center md:justify-between">
+    <div
+      className={cn(
+        'flex flex-col gap-3',
+        'bg-estoquei-bg p-4',
+        'border-b border-estoquei-border',
+        gridProps,
+        containerClassName
+      )}
+    >
       <div className="flex items-center justify-between md:contents">
         {/* ItemInfo */}
         <div className="flex items-center gap-2">
@@ -23,11 +29,20 @@ export default function ProductCard({
             {icon}
           </div>
           <div className="flex flex-col">
-            <h3 className="text-estoquei-text font-bold">{title}</h3>
+            <h3 className="text-estoquei-text font-bold">{name}</h3>
             <p className="text-estoquei-text2 text-sm">{description}</p>
           </div>
         </div>
 
+        {/* Quantity */}
+        <div className="flex items-center gap-2">
+          <span
+            className={cn(quantityStyle.textColor, 'text-xl md:text-sm px-1')}
+          >{`${quantity} un.`}</span>
+        </div>
+      </div>
+
+      <div className="flex items-center justify-between md:contents">
         {/* Status */}
         <DotInfo
           dotColor={statusStyle.dot}
@@ -40,15 +55,6 @@ export default function ProductCard({
         >
           {statusStyle.text}
         </DotInfo>
-      </div>
-
-      <div className="flex items-center justify-between md:contents">
-        {/* Quantity */}
-        <div className="flex items-center gap-2">
-          <span
-            className={cn(quantityStyle.textColor, 'text-xl md:text-sm')}
-          >{`${quantity} un.`}</span>
-        </div>
 
         {/* Buttons */}
         <div className="flex items-center gap-2">
