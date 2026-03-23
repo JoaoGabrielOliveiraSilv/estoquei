@@ -1,6 +1,5 @@
-import type { Product } from "../shared/types"
+import type { Product, ProductCardStatus } from "../shared/types"
 
-export type ProductCardStatus = 'normal' | 'warning' | 'danger'
 type StatusStyle = {
   border: string
   bg: string

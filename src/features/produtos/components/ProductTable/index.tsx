@@ -17,9 +17,9 @@ export default function ProductTable({ products }: IProductTableProps) {
 
       <div
         className={cn(
-          'flex flex-col gap-0',
-          'border border-estoquei-border rounded-lg',
-          'overflow-hidden'
+          'flex flex-col gap-2 md:gap-0',
+          'md:border border-estoquei-border md:rounded-lg',
+          'md:overflow-hidden'
         )}
       >
         <div
@@ -38,6 +38,9 @@ export default function ProductTable({ products }: IProductTableProps) {
             key={product.id}
             product={product}
             gridProps={'flex flex-col gap-3 md:grid md:grid-cols-[2fr_1fr_1fr_1fr] md:items-center'}
+            containerClassName={cn(
+              'border border-estoquei-border rounded-lg md:border-x-0 md:border-b-0 md:rounded-none'
+            )}
           />
         ))}
       </div>

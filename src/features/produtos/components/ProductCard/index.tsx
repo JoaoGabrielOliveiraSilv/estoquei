@@ -16,7 +16,7 @@ export default function ProductCard({
     <div
       className={cn(
         'flex flex-col gap-3 md:grid md:grid-cols-[2fr_1fr_1fr_auto] md:items-center',
-        'bg-estoquei-bg rounded-y-lg p-4',
+        'bg-estoquei-bg p-4',
         'border-b border-estoquei-border',
         gridProps,
         containerClassName
