@@ -1,3 +1,5 @@
+import type { Product } from "../shared/types"
+
 export type ProductCardStatus = 'normal' | 'warning' | 'danger'
 type StatusStyle = {
   border: string
@@ -16,9 +18,7 @@ export type ProductCardStyle = Record<ProductCardStatus, {
   quantity: QuantityStyle
 }>
 export interface IProductCardProps {
-  icon: React.ReactNode
-  title: string
-  description: string
-  quantity: number
-  status: ProductCardStatus
+  product: Product
+  gridProps?: React.HTMLAttributes<HTMLDivElement>['className']
+  containerClassName?: React.HTMLAttributes<HTMLDivElement>['className']
 }

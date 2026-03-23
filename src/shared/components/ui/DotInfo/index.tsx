@@ -9,7 +9,7 @@ export function DotInfo({
   containerClassName,
 }: PropsWithChildren<IStatusDotInfoProps>) {
   return (
-    <div className={cn('flex items-center gap-1', containerClassName)}>
+    <div className={cn('flex items-center gap-1 w-fit h-fit', containerClassName)}>
       <div className={cn('w-2 h-2 rounded-full', dotColor)} />
       <span className={cn('text-xs', spanClassName)}>{children}</span>
     </div>
