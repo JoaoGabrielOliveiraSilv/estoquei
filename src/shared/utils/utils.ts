@@ -1,0 +1,1 @@
+export const stringAreEqual = (a: string, b: string) => a === b
