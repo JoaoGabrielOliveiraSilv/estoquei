@@ -16,38 +16,32 @@ export default function MobileFooter({ items, className }: IBottomNavProps) {
         'md:hidden'
       )}
     >
-      {items.map((item, index) => (
+      {items.map((item) => (
         <Button
-          key={index}
+          key={item.label}
           variant="ghost"
           size="icon"
+          onClick={item.onClick}
           className={cn(
             'border-none',
-            'w-full h-full',
+            'w-full h-full flex-col gap-[3px] px-5 py-2',
             item.active ? 'text-estoquei-accent' : 'text-estoquei-text3'
           )}
         >
-          <div
-            key={item.href}
-            className="flex flex-col items-center gap-[3px] px-5 py-2"
-            onClick={item.onClick}
+          <item.icon
+            className={cn(
+              'w-6 h-6',
+              item.active ? 'text-estoquei-accent' : 'text-estoquei-text3'
+            )}
+          />
+          <span
+            className={cn(
+              'text-estoquei-text3 text-xs',
+              item.active ? 'text-estoquei-accent' : 'text-estoquei-text3'
+            )}
           >
-            <item.icon
-              className={cn(
-                'w-6 h-6',
-                item.active ? 'text-estoquei-accent' : 'text-estoquei-text3'
-              )}
-            />
-
-            <span
-              className={cn(
-                'text-estoquei-text3 text-xs',
-                item.active ? 'text-estoquei-accent' : 'text-estoquei-text3'
-              )}
-            >
-              {item.label}
-            </span>
-          </div>
+            {item.label}
+          </span>
         </Button>
       ))}
     </footer>

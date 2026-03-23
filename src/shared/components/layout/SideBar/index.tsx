@@ -22,29 +22,21 @@ export default function Sidebar({ items, className, ...props }: ISideBarProps) {
       </div>
 
       {items.map((item) => (
-        <div
+        <Button
           key={item.label}
+          variant="ghost"
+          size="icon"
+          onClick={item.onClick}
           className={cn(
             'flex items-center justify-center lg:items-start lg:justify-start',
             'p-3 hover:bg-estoquei-bg3 rounded-md',
-            className
+            'focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
+            'bg-transparent active:bg-transparent border-none w-full h-auto'
           )}
         >
-          <Button
-            variant="ghost"
-            size="icon"
-            className={cn(
-              'w-full h-full border-none lg:justify-start',
-              'focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0',
-              'bg-transparent hover:bg-transparent active:bg-transparent rounded-[5px]',
-              className
-            )}
-            onClick={item.onClick}
-          >
-            <item.icon size={16} className="text-estoquei-text3" />
-            <span className="text-estoquei-text3 text-xs hidden lg:block">{item.label}</span>
-          </Button>
-        </div>
+          <item.icon size={16} className="text-estoquei-text3" />
+          <span className="text-estoquei-text3 text-xs hidden lg:block">{item.label}</span>
+        </Button>
       ))}
     </div>
   )
