@@ -13,17 +13,19 @@ export default function Modal({ open, title, children, footer, onClose }: IModal
       className={cn(
         'fixed inset-0 z-[100]',
         'bg-black/75',
-        'flex items-center justify-center',
+        'flex items-end md:items-center justify-center',
         'p-4',
-        'overflow-visible'
+        'overflow-y-auto'
       )}
+      onClick={(e) => e.target === e.currentTarget && onClose?.()}
     >
       <div
         className={cn(
-          'flex flex-col bg-estoquei-bg',
-          'rounded-sm',
-          'overflow-visible',
-          'w-full max-w-md font-medium',
+          'flex flex-col bg-estoquei-bg2',
+          'border border-estoquei-border',
+          'rounded-t-lg md:rounded-lg',
+          'overflow-y-auto',
+          'w-full max-w-md',
           'text-estoquei-text'
         )}
       >
@@ -47,7 +49,7 @@ export default function Modal({ open, title, children, footer, onClose }: IModal
             </Button>
           </div>
         </div>
-        {children && <div className={cn('flex-2', 'p-4', 'w-full')}>{children}</div>}
+        {children && <div className={cn('flex-auto', 'p-4', 'w-full')}>{children}</div>}
         {footer && <div className={cn('flex-1', 'p-4', 'w-full', 'border-t border-estoquei-border')}>{footer}</div>}
       </div>
     </div>
