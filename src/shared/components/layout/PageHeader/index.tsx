@@ -3,10 +3,9 @@ import { cn } from '@/shared/utils/cn'
 interface IPageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string
   countItems: number
-  icon: React.ReactNode
 }
 
-export default function PageHeader({ title, countItems, icon, ...props }: IPageHeaderProps) {
+export default function PageHeader({ title, countItems, ...props }: IPageHeaderProps) {
   return (
     <div
       {...props}
@@ -18,7 +17,7 @@ export default function PageHeader({ title, countItems, icon, ...props }: IPageH
         props.className
       )}
     >
-      <h1 className="text-estoquei-text font-medium gap-2">{title}</h1>
+      <h1 className="text-estoquei-text font-medium">{title}</h1>
       <span className={
         cn(
             'bg-estoquei-bg3 text-estoquei-text3',
