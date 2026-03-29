@@ -14,7 +14,6 @@ export default function Modal({ open, title, children, footer, onClose }: IModal
         'fixed inset-0 z-[100]',
         'bg-black/75',
         'flex items-end md:items-center justify-center',
-        'p-4',
         'overflow-y-auto'
       )}
       onClick={(e) => e.target === e.currentTarget && onClose?.()}
