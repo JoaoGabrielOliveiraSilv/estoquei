@@ -1,7 +1,9 @@
 import MobileFooter from '@/shared/components/layout/MobileFooter'
+import PageHeader from '@/shared/components/layout/PageHeader'
 import SideBar from '@/shared/components/layout/SideBar'
-import { LayersPlus, PackagePlus } from 'lucide-react'
+import { LayersPlus, Package, PackagePlus } from 'lucide-react'
 import { Outlet } from 'react-router'
+import type { IAppLayoutProps } from './types'
 
 const MENU_ITEMS = [
   {
@@ -20,12 +22,13 @@ const MENU_ITEMS = [
   },
 ]
 
-export function AppLayout() {
+export function AppLayout({ headerTitle }: IAppLayoutProps) {
   return (
     <div className="flex min-h-screen bg-estoquei-bg">
       <SideBar items={MENU_ITEMS} />
       <MobileFooter items={MENU_ITEMS} />
       <main className="flex-1 overflow-y-auto">
+        <PageHeader title={headerTitle} countItems={10} icon={<Package size={20} />} />
         <Outlet />
       </main>
     </div>
