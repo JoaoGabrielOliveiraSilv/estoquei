@@ -3,11 +3,11 @@ import { useCallback, useMemo, useState } from 'react'
 import { Outlet } from 'react-router'
 
 import NewInventoryMovementsModal from '@/features/inventory-movements/components/new-movements-modal'
-import { useNewInventoryMovementModal } from '@/features/inventory-movements/hooks/use-new-inventory-movement-modal'
 import ProductModal from '@/features/produtos/components/ProductModal'
 import MobileFooter from '@/shared/components/layout/MobileFooter'
 import PageHeader from '@/shared/components/layout/PageHeader'
 import SideBar from '@/shared/components/layout/SideBar'
+import { useNewInventoryMovementModal } from '@/shared/hooks/use-new-inventory-movement-modal'
 
 import type { IAppLayoutProps } from './types'
 
