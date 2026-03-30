@@ -1,6 +1,9 @@
-import type { ProductIconItem } from '@/features/produtos/components/ProductModal/types'
-
+import type { ProductIconItem } from './product-icon'
 import type { ReactNode } from 'react'
+
+
+export type { ProductIconItem } from './product-icon'
+export { PRODUCT_ICON_ITEMS } from './product-icon'
 
 export type ProductCardStatus = 'normal' | 'warning' | 'danger'
 

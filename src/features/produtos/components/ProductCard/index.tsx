@@ -1,13 +1,14 @@
 import { LayersPlus, RotateCcw, SquarePen, Trash } from 'lucide-react'
 import { useCallback } from 'react'
 
+import { useProductModal } from '@/features/produtos/hooks/use-product-modal'
 import { Button } from '@/shared/components/ui/Button'
 import { DotInfo } from '@/shared/components/ui/DotInfo'
 import { useNewInventoryMovementModal } from '@/shared/hooks/use-new-inventory-movement-modal'
 import { cn } from '@/shared/utils/cn'
 
+
 import { variants } from './variants'
-import { useProductModal } from '../ProductModal/hooks/product-modal.hooks'
 
 import type { IProductCardProps } from './types'
 

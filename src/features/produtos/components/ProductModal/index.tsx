@@ -8,40 +8,10 @@ import { ModalSection } from '@/shared/components/ui/ModalSection'
 import { Textarea } from '@/shared/components/ui/Textarea'
 import UploadImage from '@/shared/components/ui/UploadImage'
 import type { Product } from '@/shared/types/product'
+import { PRODUCT_ICON_ITEMS } from '@/shared/types/product-icon'
 import { cn } from '@/shared/utils/cn'
 
 import type { IProductModalProps } from './types'
-
-export const ICON_ITEMS = {
-  beer: {
-    emoji: '🍺',
-    name: 'Cerveja',
-  },
-  wine: {
-    emoji: '🍷',
-    name: 'Vinho',
-  },
-  glassWater: {
-    emoji: '🥛',
-    name: 'Água',
-  },
-  sandwich: {
-    emoji: '🍔',
-    name: 'Sanduíche',
-  },
-  shoppingBag: {
-    emoji: '🛒',
-    name: 'Sacola',
-  },
-  package: {
-    emoji: '📦',
-    name: 'Pacote',
-  },
-  boxes: {
-    emoji: '🗂️',
-    name: 'Caixas',
-  },
-}
 
 export default function ProductModal({ open, product, onClose }: IProductModalProps) {
   if (!open) return null
@@ -52,13 +22,13 @@ export default function ProductModal({ open, product, onClose }: IProductModalPr
 }
 
 function ProductModalBody({ product, onClose }: { product?: Product; onClose: () => void }) {
-  const [selectedIconItem, setSelectedIconItem] = useState<keyof typeof ICON_ITEMS | null>(
+  const [selectedIconItem, setSelectedIconItem] = useState<keyof typeof PRODUCT_ICON_ITEMS | null>(
     () => product?.emoji ?? null
   )
   const [name, setName] = useState(() => product?.name ?? '')
   const [description, setDescription] = useState(() => product?.description ?? '')
 
-  const handleIconItemClick = (iconKey: keyof typeof ICON_ITEMS) => {
+  const handleIconItemClick = (iconKey: keyof typeof PRODUCT_ICON_ITEMS) => {
     setSelectedIconItem(iconKey)
   }
 
@@ -86,13 +56,13 @@ function ProductModalBody({ product, onClose }: { product?: Product; onClose: ()
       <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
         <ModalSection title="Ícone" className="gap-4">
           <div className="flex flex-wrap gap-2">
-            {Object.entries(ICON_ITEMS).map(([iconKey, iconItem]) => (
+            {Object.entries(PRODUCT_ICON_ITEMS).map(([iconKey, iconItem]) => (
               <Button
                 key={iconItem.name}
                 variant={selectedIconItem === iconKey ? 'accent' : 'ghost'}
                 size="icon"
                 className="w-[38px] h-[38px] text-[28px]"
-                onClick={() => handleIconItemClick(iconKey as keyof typeof ICON_ITEMS)}
+                onClick={() => handleIconItemClick(iconKey as keyof typeof PRODUCT_ICON_ITEMS)}
               >
                 {iconItem.emoji}
               </Button>
