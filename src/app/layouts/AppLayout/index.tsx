@@ -36,13 +36,6 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
         icon: PackagePlus,
         onClick: handleNewProductModalOpen,
       },
-      {
-        label: 'Nova movimentação',
-        icon: LayersPlus,
-        onClick: () => {
-          console.log('Nova movimentação')
-        },
-      },
     ],
     [handleNewProductModalOpen]
   )
