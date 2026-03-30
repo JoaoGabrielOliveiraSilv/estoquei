@@ -1,4 +1,4 @@
-import { LayersPlus, PackagePlus } from 'lucide-react'
+import { PackagePlus } from 'lucide-react'
 import { useCallback, useMemo, useState } from 'react'
 import { Outlet } from 'react-router'
 
@@ -26,13 +26,6 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
         label: 'Novo Produto',
         icon: PackagePlus,
         onClick: handleNewProductModalOpen,
-      },
-      {
-        label: 'Nova movimentação',
-        icon: LayersPlus,
-        onClick: () => {
-          console.log('Nova movimentação')
-        },
       },
     ],
     [handleNewProductModalOpen]

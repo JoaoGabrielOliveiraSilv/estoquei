@@ -1,5 +1,7 @@
 import { LayersPlus, RotateCcw, SquarePen, Trash } from 'lucide-react'
+import { useCallback, useState } from 'react'
 
+import NewMovementsModal from '@/features/inventory-movements/components/new-movements-modal'
 import { Button } from '@/shared/components/ui/Button'
 import { DotInfo } from '@/shared/components/ui/DotInfo'
 import { cn } from '@/shared/utils/cn'
@@ -8,15 +10,24 @@ import { variants } from './variants'
 
 import type { IProductCardProps } from './types'
 
-
-
-
 export default function ProductCard({
   product: { icon, name, description, quantity, status },
+  product,
   gridProps,
   containerClassName,
+  onSubmitNewMovementClick,
 }: IProductCardProps) {
   const { quantity: quantityStyle, status: statusStyle } = variants[status]
+  const [isNewMovementsModalOpen, setIsNewMovementsModalOpen] = useState(false)
+
+  const handleSubmitNewMovementClick = useCallback(() => {
+    setIsNewMovementsModalOpen(true)
+  }, [])
+
+  const handleSubmitNewMovement = useCallback(() => {
+    onSubmitNewMovementClick?.(product)
+    setIsNewMovementsModalOpen(false)
+  }, [onSubmitNewMovementClick, product])
 
   return (
     <div
@@ -64,7 +75,13 @@ export default function ProductCard({
 
         {/* Buttons */}
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon">
+          <NewMovementsModal
+            product={product}
+            open={isNewMovementsModalOpen}
+            onClose={() => setIsNewMovementsModalOpen(false)}
+            onSubmit={handleSubmitNewMovement}
+          />
+          <Button variant="ghost" size="icon" onClick={handleSubmitNewMovementClick}>
             <LayersPlus size={16} />
           </Button>
           <Button variant="ghost" size="icon">
