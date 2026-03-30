@@ -38,7 +38,7 @@ export default function NewInventoryMovementsModal({
       onClose={handleClose}
       footer={
         <div className="flex justify-end gap-2">
-          <Button variant="ghost" onClick={onClose}>
+          <Button variant="ghost" onClick={handleClose}>
             Cancelar
           </Button>
           <Button variant="accent" onClick={handleSubmit}>
