@@ -1,8 +1,11 @@
 import { Search } from 'lucide-react'
-import ProductCard from '../ProductCard/index.tsx'
-import type { IProductTableProps } from './types.ts'
-import { Input } from '@/shared/components/ui/Input.tsx'
+
+import { Input } from '@/shared/components/ui/Input/index.tsx'
 import { cn } from '@/shared/utils/cn.ts'
+
+import ProductCard from '../ProductCard/index.tsx'
+
+import type { IProductTableProps } from './types.ts'
 
 export default function ProductTable({ products, ...props }: IProductTableProps) {
   return (
@@ -12,7 +15,7 @@ export default function ProductTable({ products, ...props }: IProductTableProps)
           size={15}
           className="absolute left-3 top-1/2 -translate-y-1/2 text-estoquei-text3 pointer-events-none"
         />
-        <Input placeholder="Buscar produto..." />
+        <Input placeholder="Buscar produto..." withIcon />
       </div>
 
       <div

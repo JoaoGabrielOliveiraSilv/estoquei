@@ -2,6 +2,7 @@
 import { Routes, Route } from 'react-router-dom'
 
 import ProductListPage from '@/features/produtos/pages/ProductList'
+
 import { AppLayout } from '../layouts/AppLayout'
 
 function NotFoundPage() {

@@ -1,9 +1,15 @@
-import { Button } from '@/shared/components/ui/Button'
 import { LayersPlus, RotateCcw, SquarePen, Trash } from 'lucide-react'
-import type { IProductCardProps } from './types'
-import { cn } from '@/shared/utils/cn'
-import { variants } from './variants'
+
+import { Button } from '@/shared/components/ui/Button'
 import { DotInfo } from '@/shared/components/ui/DotInfo'
+import { cn } from '@/shared/utils/cn'
+
+import { variants } from './variants'
+
+import type { IProductCardProps } from './types'
+
+
+
 
 export default function ProductCard({
   product: { icon, name, description, quantity, status },

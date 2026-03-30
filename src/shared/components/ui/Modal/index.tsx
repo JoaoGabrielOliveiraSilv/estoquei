@@ -1,9 +1,12 @@
-import { cn } from '@/shared/utils/cn'
 import { X } from 'lucide-react'
+
+import { cn } from '@/shared/utils/cn'
+
 import { Button } from '../Button'
+
 import type { IModalProps } from './types'
 
-export default function Modal({ open, title, children, footer, onClose }: IModalProps) {
+export default function Modal({ open, title, children, footer, onClose, ...props }: IModalProps) {
   if (!open) {
     return null
   }
@@ -16,6 +19,7 @@ export default function Modal({ open, title, children, footer, onClose }: IModal
         'flex items-end md:items-center justify-center',
         'overflow-y-auto'
       )}
+      {...props}
       onClick={(e) => e.target === e.currentTarget && onClose?.()}
     >
       <div

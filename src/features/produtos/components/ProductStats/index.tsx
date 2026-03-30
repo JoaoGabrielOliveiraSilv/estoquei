@@ -1,5 +1,6 @@
-import type { IProductStatsProps } from './types'
 import { DotInfo } from '@/shared/components/ui/DotInfo'
+
+import type { IProductStatsProps } from './types'
 
 export default function ProductStats({ total, lowStock, outOfStockQuantity }: IProductStatsProps) {
   return (

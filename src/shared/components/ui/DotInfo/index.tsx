@@ -1,6 +1,7 @@
-import type { PropsWithChildren } from 'react'
 import { cn } from '@/shared/utils/cn'
+
 import type { IStatusDotInfoProps } from './types'
+import type { PropsWithChildren } from 'react'
 
 export function DotInfo({
   dotColor,
