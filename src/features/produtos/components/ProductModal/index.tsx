@@ -4,13 +4,15 @@ import { useState } from 'react'
 import { Button } from '@/shared/components/ui/Button'
 import { Input } from '@/shared/components/ui/Input'
 import Modal from '@/shared/components/ui/Modal/index'
+import { ModalSection } from '@/shared/components/ui/ModalSection'
 import { Textarea } from '@/shared/components/ui/Textarea'
 import UploadImage from '@/shared/components/ui/UploadImage'
+import type { Product } from '@/shared/types/product'
 import { cn } from '@/shared/utils/cn'
 
 import type { IProductModalProps } from './types'
 
-const ICON_ITEMS = {
+export const ICON_ITEMS = {
   beer: {
     emoji: '🍺',
     name: 'Cerveja',
@@ -41,41 +43,48 @@ const ICON_ITEMS = {
   },
 }
 
-export default function ProductModal({ open, onClose }: IProductModalProps) {
-  const [selectedIconItem, setSelectedIconItem] = useState<keyof typeof ICON_ITEMS | null>(null)
-
+export default function ProductModal({ open, product, onClose }: IProductModalProps) {
   if (!open) return null
 
-  const sectionTitleStyle = cn(
-    'text-estoquei-text3 text-[13px] font-medium uppercase',
-    'tracking-[.08em]'
+  return (
+    <ProductModalBody key={product?.id ?? 'new'} product={product} onClose={onClose} />
   )
+}
+
+function ProductModalBody({ product, onClose }: { product?: Product; onClose: () => void }) {
+  const [selectedIconItem, setSelectedIconItem] = useState<keyof typeof ICON_ITEMS | null>(
+    () => product?.emoji ?? null
+  )
+  const [name, setName] = useState(() => product?.name ?? '')
+  const [description, setDescription] = useState(() => product?.description ?? '')
 
   const handleIconItemClick = (iconKey: keyof typeof ICON_ITEMS) => {
     setSelectedIconItem(iconKey)
   }
 
+  const handleClose = () => {
+    onClose()
+  }
+
   return (
     <Modal
-      open={open}
-      title="Novo Produto"
-      onClose={onClose}
+      open
+      title={product ? 'Editar Produto' : 'Novo Produto'}
+      onClose={handleClose}
       footer={
         <div className="flex justify-end gap-2">
-          <Button variant="ghost" onClick={onClose}>
+          <Button variant="ghost" onClick={handleClose}>
             Cancelar
           </Button>
-          <Button variant="accent" onClick={onClose}>
+          <Button variant="accent" onClick={() => {}}>
             <Plus size={16} />
             Criar produto
           </Button>
         </div>
       }
     >
-      <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
-        {/* Icon Section */}
-        <div className="flex flex-col gap-4">
-          <span className={sectionTitleStyle}>Ícone</span>
+      <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+        <ModalSection title="Ícone" className="gap-4">
           <div className="flex flex-wrap gap-2">
             {Object.entries(ICON_ITEMS).map(([iconKey, iconItem]) => (
               <Button
@@ -89,33 +98,31 @@ export default function ProductModal({ open, onClose }: IProductModalProps) {
               </Button>
             ))}
           </div>
-        </div>
+        </ModalSection>
 
-        {/* Name Section */}
-        <div className="flex flex-col gap-2">
-          <span className={sectionTitleStyle}>Nome</span>
+        <ModalSection title="Nome">
           <Input
             withIcon={false}
             placeholder="Digite o nome do produto"
             className={cn('text-[15px]')}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
-        </div>
+        </ModalSection>
 
-        {/* Description Section */}
-        <div className="flex flex-col gap-2">
-          <span className={sectionTitleStyle}>Descrição</span>
+        <ModalSection title="Descrição">
           <Textarea
             rows={4}
             placeholder="Digite a descrição do produto..."
             className={cn('text-[15px]')}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
-        </div>
+        </ModalSection>
 
-        {/* Image Section */}
-        <div className="flex flex-col gap-2">
-          <span className={sectionTitleStyle}>Imagem</span>
+        <ModalSection title="Imagem">
           <UploadImage />
-        </div>
+        </ModalSection>
       </form>
     </Modal>
   )

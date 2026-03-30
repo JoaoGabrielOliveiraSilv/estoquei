@@ -15,6 +15,7 @@ export const mockProductStats = {
 export const mockProducts = [
   {
     id: "1",
+    emoji: 'package' as const,
     icon: <LayersPlus size={16} className="text-estoquei-accent" />,
     name: "Produto 1",
     description: "Descrição do produto 1",
@@ -23,6 +24,7 @@ export const mockProducts = [
   },
   {
     id: "2",
+    emoji: 'package' as const,
     icon: <LayersPlus size={16} className="text-estoquei-accent" />,
     name: "Produto 2",
     description: "Descrição do produto 2",
@@ -31,6 +33,7 @@ export const mockProducts = [
   },
   {
     id: "3",
+    emoji: 'package' as const,
     icon: <LayersPlus size={16} className="text-estoquei-accent" />,
     name: "Produto 3",
     description: "Descrição do produto 3",
@@ -39,6 +42,7 @@ export const mockProducts = [
   },
   {
     id: "4",
+    emoji: 'package' as const,
     icon: <LayersPlus size={16} className="text-estoquei-accent" />,
     name: "Produto 4",
     description: "Descrição do produto 4",
@@ -47,6 +51,7 @@ export const mockProducts = [
   },
   {
     id: "5",
+    emoji: 'package' as const,
     icon: <LayersPlus size={16} className="text-estoquei-accent" />,
     name: "Produto 5",
     description: "Descrição do produto 5",
@@ -55,6 +60,7 @@ export const mockProducts = [
   },
   {
     id: "6",
+    emoji: 'package' as const,
     icon: <LayersPlus size={16} className="text-estoquei-accent" />,
     name: "Produto 6",
     description: "Descrição do produto 6",
@@ -63,6 +69,7 @@ export const mockProducts = [
   },
   {
     id: "7",
+    emoji: 'package' as const,
     icon: <LayersPlus size={16} className="text-estoquei-accent" />,
     name: "Produto 7",
     description: "Descrição do produto 7",
@@ -71,6 +78,7 @@ export const mockProducts = [
   },
   {
     id: "8",
+    emoji: 'package' as const,
     icon: <LayersPlus size={16} className="text-estoquei-accent" />,
     name: "Produto 8",
     description: "Descrição do produto 8",
@@ -79,6 +87,7 @@ export const mockProducts = [
   },
   {
     id: "9",
+    emoji: 'package' as const,
     icon: <LayersPlus size={16} className="text-estoquei-accent" />,
     name: "Produto 9",
     description: "Descrição do produto 9",
@@ -87,6 +96,7 @@ export const mockProducts = [
   },
   {
     id: "10",
+    emoji: 'package' as const,
     icon: <LayersPlus size={16} className="text-estoquei-accent" />,
     name: "Produto 10",
     description: "Descrição do produto 10",

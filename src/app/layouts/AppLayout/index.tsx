@@ -1,24 +1,33 @@
 import { LayersPlus, PackagePlus } from 'lucide-react'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 import { Outlet } from 'react-router'
 
+import NewInventoryMovementsModal from '@/features/inventory-movements/components/new-movements-modal'
 import ProductModal from '@/features/produtos/components/ProductModal'
+import { useProductModal } from '@/features/produtos/components/ProductModal/hooks/product-modal.hooks'
 import MobileFooter from '@/shared/components/layout/MobileFooter'
 import PageHeader from '@/shared/components/layout/PageHeader'
 import SideBar from '@/shared/components/layout/SideBar'
+import { useNewInventoryMovementModal } from '@/shared/hooks/use-new-inventory-movement-modal'
 
 import type { IAppLayoutProps } from './types'
 
 export function AppLayout({ headerTitle }: IAppLayoutProps) {
-  const [isNewProductModalOpen, setIsNewProductModalOpen] = useState(false)
+  const { isNewInventoryMovementModalOpen } = useNewInventoryMovementModal()
+  const {
+    close: closeProductModal,
+    open: openProductModal,
+    isOpen: isProductModalOpen,
+    product: productToEdit,
+  } = useProductModal()
 
   const handleNewProductModalOpen = useCallback(() => {
-    setIsNewProductModalOpen(true)
-  }, [])
+    openProductModal()
+  }, [openProductModal])
 
-  const handleNewProductModalClose = useCallback(() => {
-    setIsNewProductModalOpen(false)
-  }, [])
+  const handleProductModalClose = useCallback(() => {
+    closeProductModal()
+  }, [closeProductModal])
 
   const MENU_ITEMS = useMemo(
     () => [
@@ -40,7 +49,12 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
 
   return (
     <div className="flex h-screen bg-estoquei-bg">
-      <ProductModal open={isNewProductModalOpen} onClose={handleNewProductModalClose} />
+      <NewInventoryMovementsModal open={isNewInventoryMovementModalOpen} />
+      <ProductModal
+        open={isProductModalOpen}
+        product={productToEdit}
+        onClose={handleProductModalClose}
+      />
       <SideBar items={MENU_ITEMS} />
       <MobileFooter items={MENU_ITEMS} />
 
