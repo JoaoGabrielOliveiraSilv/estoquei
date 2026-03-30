@@ -10,8 +10,8 @@ import { variants } from './variants'
 
 import type { IProductCardProps } from './types'
 
-export default function ProductCard({ gridProps, containerClassName }: IProductCardProps) {
-  const { openNewInventoryMovementModal, productToMove: product } = useNewInventoryMovementModal()
+export default function ProductCard({ product, gridProps, containerClassName }: IProductCardProps) {
+  const { openNewInventoryMovementModal } = useNewInventoryMovementModal()
   const { quantity: quantityStyle, status: statusStyle } = variants[product.status]
 
   const handleNewMovementClick = useCallback(() => {

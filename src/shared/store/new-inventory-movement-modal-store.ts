@@ -11,7 +11,7 @@ interface NewInventoryMovementModalState {
 
 const initialProduct: Product = {
   id: '',
-  icon: <></>,
+  icon: null,
   name: '',
   description: '',
   quantity: 0,
@@ -22,5 +22,5 @@ export const useNewInventoryMovementModalStore = create<NewInventoryMovementModa
   isOpen: false,
   productToMove: initialProduct,
   open: (product) => set({ isOpen: true, productToMove: product }),
-  close: () => set({ isOpen: false, productToMove: { id: '', icon: <></>, name: '', description: '', quantity: 0, status: 'normal' as const } }),
+  close: () => set({ isOpen: false, productToMove: initialProduct }),
 }))
