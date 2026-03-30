@@ -80,7 +80,7 @@ export default function ProductModal({ open, onClose }: IProductModalProps) {
             {Object.entries(ICON_ITEMS).map(([iconKey, iconItem]) => (
               <Button
                 key={iconItem.name}
-                variant={selectedIconItem == iconKey ? 'accent' : 'ghost'}
+                variant={selectedIconItem === iconKey ? 'accent' : 'ghost'}
                 size="icon"
                 className="w-[38px] h-[38px] text-[28px]"
                 onClick={() => handleIconItemClick(iconKey as keyof typeof ICON_ITEMS)}

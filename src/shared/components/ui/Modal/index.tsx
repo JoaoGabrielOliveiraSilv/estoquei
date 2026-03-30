@@ -13,13 +13,13 @@ export default function Modal({ open, title, children, footer, onClose, ...props
 
   return (
     <div
-      {...props}
       className={cn(
         'fixed inset-0 z-[100]',
         'bg-black/75',
         'flex items-end md:items-center justify-center',
         'overflow-y-auto'
       )}
+      {...props}
       onClick={(e) => e.target === e.currentTarget && onClose?.()}
     >
       <div

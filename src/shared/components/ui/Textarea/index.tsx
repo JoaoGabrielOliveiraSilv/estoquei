@@ -8,7 +8,7 @@ export function Textarea({ className, rows = 3, ...props }: ITextareaProps) {
       rows={rows}
       {...props}
       className={cn(
-        'w-full px-3 py-4',
+        'w-full px-[13px] py-[11px]',
         'bg-estoquei-bg2',
         'border border-estoquei-border rounded-md',
         'text-estoquei-text text-[13px] outline-none',
