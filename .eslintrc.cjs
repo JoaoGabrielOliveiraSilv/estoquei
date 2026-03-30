@@ -45,6 +45,14 @@ module.exports = [
       ...js.configs.recommended.rules,
       ...tseslint.configs.recommended[0].rules,
       ...tseslint.configs.recommended[1].rules,
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
       ...reactHooks.configs.recommended.rules,
       'import/order': [
         'error',

@@ -1,15 +1,18 @@
-import { LayersPlus, PackagePlus } from 'lucide-react'
+import { PackagePlus } from 'lucide-react'
 import { useCallback, useMemo, useState } from 'react'
 import { Outlet } from 'react-router'
 
+import NewInventoryMovementsModal from '@/features/inventory-movements/components/new-movements-modal'
 import ProductModal from '@/features/produtos/components/ProductModal'
 import MobileFooter from '@/shared/components/layout/MobileFooter'
 import PageHeader from '@/shared/components/layout/PageHeader'
 import SideBar from '@/shared/components/layout/SideBar'
+import { useNewInventoryMovementModal } from '@/shared/hooks/use-new-inventory-movement-modal'
 
 import type { IAppLayoutProps } from './types'
 
 export function AppLayout({ headerTitle }: IAppLayoutProps) {
+  const { isNewInventoryMovementModalOpen } = useNewInventoryMovementModal()
   const [isNewProductModalOpen, setIsNewProductModalOpen] = useState(false)
 
   const handleNewProductModalOpen = useCallback(() => {
@@ -27,19 +30,13 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
         icon: PackagePlus,
         onClick: handleNewProductModalOpen,
       },
-      {
-        label: 'Nova movimentação',
-        icon: LayersPlus,
-        onClick: () => {
-          console.log('Nova movimentação')
-        },
-      },
     ],
     [handleNewProductModalOpen]
   )
 
   return (
     <div className="flex h-screen bg-estoquei-bg">
+      <NewInventoryMovementsModal open={isNewInventoryMovementModalOpen} />
       <ProductModal open={isNewProductModalOpen} onClose={handleNewProductModalClose} />
       <SideBar items={MENU_ITEMS} />
       <MobileFooter items={MENU_ITEMS} />

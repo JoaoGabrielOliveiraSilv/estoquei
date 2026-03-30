@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/shared/components/ui/Button'
 import { Input } from '@/shared/components/ui/Input'
 import Modal from '@/shared/components/ui/Modal/index'
+import { ModalSection } from '@/shared/components/ui/ModalSection'
 import { Textarea } from '@/shared/components/ui/Textarea'
 import UploadImage from '@/shared/components/ui/UploadImage'
 import { cn } from '@/shared/utils/cn'
@@ -46,11 +47,6 @@ export default function ProductModal({ open, onClose }: IProductModalProps) {
 
   if (!open) return null
 
-  const sectionTitleStyle = cn(
-    'text-estoquei-text3 text-[13px] font-medium uppercase',
-    'tracking-[.08em]'
-  )
-
   const handleIconItemClick = (iconKey: keyof typeof ICON_ITEMS) => {
     setSelectedIconItem(iconKey)
   }
@@ -73,9 +69,7 @@ export default function ProductModal({ open, onClose }: IProductModalProps) {
       }
     >
       <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
-        {/* Icon Section */}
-        <div className="flex flex-col gap-4">
-          <span className={sectionTitleStyle}>Ícone</span>
+        <ModalSection title="Ícone" className="gap-4">
           <div className="flex flex-wrap gap-2">
             {Object.entries(ICON_ITEMS).map(([iconKey, iconItem]) => (
               <Button
@@ -89,33 +83,27 @@ export default function ProductModal({ open, onClose }: IProductModalProps) {
               </Button>
             ))}
           </div>
-        </div>
+        </ModalSection>
 
-        {/* Name Section */}
-        <div className="flex flex-col gap-2">
-          <span className={sectionTitleStyle}>Nome</span>
+        <ModalSection title="Nome">
           <Input
             withIcon={false}
             placeholder="Digite o nome do produto"
             className={cn('text-[15px]')}
           />
-        </div>
+        </ModalSection>
 
-        {/* Description Section */}
-        <div className="flex flex-col gap-2">
-          <span className={sectionTitleStyle}>Descrição</span>
+        <ModalSection title="Descrição">
           <Textarea
             rows={4}
             placeholder="Digite a descrição do produto..."
             className={cn('text-[15px]')}
           />
-        </div>
+        </ModalSection>
 
-        {/* Image Section */}
-        <div className="flex flex-col gap-2">
-          <span className={sectionTitleStyle}>Imagem</span>
+        <ModalSection title="Imagem">
           <UploadImage />
-        </div>
+        </ModalSection>
       </form>
     </Modal>
   )
