@@ -7,77 +7,62 @@ import Modal from '@/shared/components/ui/Modal/index'
 import { ModalSection } from '@/shared/components/ui/ModalSection'
 import { Textarea } from '@/shared/components/ui/Textarea'
 import UploadImage from '@/shared/components/ui/UploadImage'
+import type { Product } from '@/shared/types/product'
+import { PRODUCT_ICON_ITEMS, type ProductIconItem } from '@/shared/types/product-icon'
 import { cn } from '@/shared/utils/cn'
 
 import type { IProductModalProps } from './types'
 
-const ICON_ITEMS = {
-  beer: {
-    emoji: '🍺',
-    name: 'Cerveja',
-  },
-  wine: {
-    emoji: '🍷',
-    name: 'Vinho',
-  },
-  glassWater: {
-    emoji: '🥛',
-    name: 'Água',
-  },
-  sandwich: {
-    emoji: '🍔',
-    name: 'Sanduíche',
-  },
-  shoppingBag: {
-    emoji: '🛒',
-    name: 'Sacola',
-  },
-  package: {
-    emoji: '📦',
-    name: 'Pacote',
-  },
-  boxes: {
-    emoji: '🗂️',
-    name: 'Caixas',
-  },
-}
-
-export default function ProductModal({ open, onClose }: IProductModalProps) {
-  const [selectedIconItem, setSelectedIconItem] = useState<keyof typeof ICON_ITEMS | null>(null)
-
+export default function ProductModal({ open, product, onClose }: IProductModalProps) {
   if (!open) return null
 
-  const handleIconItemClick = (iconKey: keyof typeof ICON_ITEMS) => {
+  return (
+    <ProductModalBody key={product?.id ?? 'new'} product={product} onClose={onClose} />
+  )
+}
+
+function ProductModalBody({ product, onClose }: { product?: Product; onClose: () => void }) {
+  const [selectedIconItem, setSelectedIconItem] = useState<ProductIconItem | null>(
+    () => product?.emoji ?? null
+  )
+  const [name, setName] = useState(() => product?.name ?? '')
+  const [description, setDescription] = useState(() => product?.description ?? '')
+
+  const handleIconItemClick = (iconKey: ProductIconItem) => {
     setSelectedIconItem(iconKey)
+  }
+
+  const handleClose = () => {
+    onClose()
   }
 
   return (
     <Modal
-      open={open}
-      title="Novo Produto"
-      onClose={onClose}
+      open
+      title={product ? 'Editar Produto' : 'Novo Produto'}
+      onClose={handleClose}
       footer={
         <div className="flex justify-end gap-2">
-          <Button variant="ghost" onClick={onClose}>
+          <Button variant="ghost" onClick={handleClose}>
             Cancelar
           </Button>
-          <Button variant="accent" onClick={onClose}>
+          <Button variant="accent" onClick={() => {}}>
             <Plus size={16} />
             Criar produto
           </Button>
         </div>
       }
     >
-      <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
+      <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
         <ModalSection title="Ícone" className="gap-4">
           <div className="flex flex-wrap gap-2">
-            {Object.entries(ICON_ITEMS).map(([iconKey, iconItem]) => (
+            {Object.entries(PRODUCT_ICON_ITEMS).map(([iconKey, iconItem]) => (
               <Button
                 key={iconItem.name}
                 variant={selectedIconItem === iconKey ? 'accent' : 'ghost'}
                 size="icon"
                 className="w-[38px] h-[38px] text-[28px]"
-                onClick={() => handleIconItemClick(iconKey as keyof typeof ICON_ITEMS)}
+                onClick={() => handleIconItemClick(iconKey as ProductIconItem)}
               >
                 {iconItem.emoji}
               </Button>
@@ -90,6 +75,8 @@ export default function ProductModal({ open, onClose }: IProductModalProps) {
             withIcon={false}
             placeholder="Digite o nome do produto"
             className={cn('text-[15px]')}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </ModalSection>
 
@@ -98,6 +85,8 @@ export default function ProductModal({ open, onClose }: IProductModalProps) {
             rows={4}
             placeholder="Digite a descrição do produto..."
             className={cn('text-[15px]')}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </ModalSection>
 

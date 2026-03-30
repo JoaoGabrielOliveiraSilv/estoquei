@@ -7,8 +7,10 @@ export const buttonVariants = cva(
       variant: {
         'ghost': 'bg-estoquei-bg2 text-estoquei-text2 border border-estoquei-border hover:bg-estoquei-bg3',
         'accent': 'text-estoquei-bg2 border border-estoquei-accent hover:bg-estoquei-accent2 bg-estoquei-accent',
-        'green-selected': 'bg-estoquei-green/10 border border-estoquei-green/35 text-estoquei-green',
-        'red-selected': 'bg-estoquei-danger/10 border border-estoquei-danger/35 text-estoquei-danger',
+        'green-selected':
+          'bg-estoquei-green/10 border border-estoquei-green/35 text-estoquei-green',
+        'red-selected':
+          'bg-estoquei-danger/10 border border-estoquei-danger/35 text-estoquei-danger',
       },
       size: {
         icon: 'w-7 h-7',
