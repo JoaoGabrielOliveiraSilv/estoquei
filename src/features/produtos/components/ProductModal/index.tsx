@@ -47,7 +47,7 @@ function ProductModalBody({ product, onClose }: { product?: Product; onClose: ()
             Cancelar
           </Button>
           <Button variant="accent" onClick={() => {}}>
-            <Plus size={16} />
+            {product ? null : <Plus size={16} />}
             {product ? 'Salvar' : 'Criar produto'}
           </Button>
         </div>
