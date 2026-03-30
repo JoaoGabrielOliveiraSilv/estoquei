@@ -9,53 +9,43 @@ import { Textarea } from '@/shared/components/ui/Textarea'
 import UploadImage from '@/shared/components/ui/UploadImage'
 import { cn } from '@/shared/utils/cn'
 
+import type { IProductModalProps } from './types'
 
-export interface IProductModalProps {
-  open: boolean
-  onClose: () => void
+const ICON_ITEMS = {
+  beer: {
+    emoji: '🍺',
+    name: 'Cerveja',
+  },
+  wine: {
+    emoji: '🍷',
+    name: 'Vinho',
+  },
+  glassWater: {
+    emoji: '🥛',
+    name: 'Água',
+  },
+  sandwich: {
+    emoji: '🍔',
+    name: 'Sanduíche',
+  },
+  shoppingBag: {
+    emoji: '🛒',
+    name: 'Sacola',
+  },
+  package: {
+    emoji: '📦',
+    name: 'Pacote',
+  },
+  boxes: {
+    emoji: '🗂️',
+    name: 'Caixas',
+  },
 }
 
 export default function ProductModal({ open, onClose }: IProductModalProps) {
+  if (!open) return null
+
   const [selectedIconItem, setSelectedIconItem] = useState<keyof typeof ICON_ITEMS | null>(null)
-  if(!open) return null
-  
-  const ICON_ITEMS = {
-    beer: {
-      emoji: '🍺',
-      name: 'Cerveja',
-      selected: false,
-    },
-    wine: {
-      emoji: '🍷',
-      name: 'Vinho',
-      selected: false,
-    },
-    glassWater: {
-      emoji: '🥛',
-      name: 'Água',
-      selected: false,
-    },
-    sandwich: {
-      emoji: '🍔',
-      name: 'Sanduíche',
-      selected: false,
-    },
-    shoppingBag: {
-      emoji: '🛒',
-      name: 'Sacola',
-      selected: false,
-    },
-    package: {
-      emoji: '📦',
-      name: 'Pacote',
-      selected: false,
-    },
-    boxes: {
-      emoji: '🗂️',
-      name: 'Caixas',
-      selected: false,
-    },
-  }
 
   const sectionTitleStyle = cn(
     'text-estoquei-text3 text-[13px] font-medium uppercase',
@@ -66,7 +56,6 @@ export default function ProductModal({ open, onClose }: IProductModalProps) {
     iconItem: (typeof ICON_ITEMS)[keyof typeof ICON_ITEMS],
     iconKey: keyof typeof ICON_ITEMS
   ) => {
-    iconItem.selected = !iconItem.selected
     setSelectedIconItem(iconKey)
   }
 
@@ -87,7 +76,7 @@ export default function ProductModal({ open, onClose }: IProductModalProps) {
         </div>
       }
     >
-      <form className="flex flex-col gap-4">
+      <form className="flex flex-col gap-4" onSubmit={e => e.preventDefault()}>
         {/* Icon Section */}
         <div className="flex flex-col gap-4">
           <span className={sectionTitleStyle}>Ícone</span>
@@ -95,13 +84,9 @@ export default function ProductModal({ open, onClose }: IProductModalProps) {
             {Object.entries(ICON_ITEMS).map(([iconKey, iconItem]) => (
               <Button
                 key={iconItem.name}
-                className={cn(
-                  buttonVariants({
-                    variant: selectedIconItem == iconKey ? 'accent' : 'ghost',
-                    size: 'icon',
-                  }),
-                  'w-[38px] h-[38px] text-[28px]'
-                )}
+                variant={selectedIconItem == iconKey ? 'accent' : 'ghost'}
+                size="icon"
+                className="w-[38px] h-[38px] text-[28px]"
                 onClick={() => handleIconItemClick(iconItem, iconKey as keyof typeof ICON_ITEMS)}
               >
                 {iconItem.emoji}

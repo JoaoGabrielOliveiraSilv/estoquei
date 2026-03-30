@@ -1,5 +1,5 @@
 import { LayersPlus, PackagePlus } from 'lucide-react'
-import { useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { Outlet } from 'react-router'
 
 import ProductModal from '@/features/produtos/components/ProductModal'
@@ -9,33 +9,34 @@ import SideBar from '@/shared/components/layout/SideBar'
 
 import type { IAppLayoutProps } from './types'
 
-
-
 export function AppLayout({ headerTitle }: IAppLayoutProps) {
   const [isNewProductModalOpen, setIsNewProductModalOpen] = useState(false)
 
-  const handleNewProductModalOpen = () => {
+  const handleNewProductModalOpen = useCallback(() => {
     setIsNewProductModalOpen(true)
-  }
+  }, [])
 
-  const handleNewProductModalClose = () => {
+  const handleNewProductModalClose = useCallback(() => {
     setIsNewProductModalOpen(false)
-  }
+  }, [])
 
-  const MENU_ITEMS = [
-    {
-      label: 'Novo Produto',
-      icon: PackagePlus,
-      onClick: handleNewProductModalOpen,
-    },
-    {
-      label: 'Nova movimentação',
-      icon: LayersPlus,
-      onClick: () => {
-        console.log('Nova movimentação')
+  const MENU_ITEMS = useMemo(
+    () => [
+      {
+        label: 'Novo Produto',
+        icon: PackagePlus,
+        onClick: handleNewProductModalOpen,
       },
-    },
-  ]
+      {
+        label: 'Nova movimentação',
+        icon: LayersPlus,
+        onClick: () => {
+          console.log('Nova movimentação')
+        },
+      },
+    ],
+    [handleNewProductModalOpen]
+  )
 
   return (
     <div className="flex h-screen bg-estoquei-bg">
