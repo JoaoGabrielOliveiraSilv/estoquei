@@ -11,14 +11,7 @@ export default function ProductListPage() {
         lowStock={mockProductStats.lowStock}
         outOfStockQuantity={mockProductStats.outOfStockQuantity}
       />
-      <ProductTable
-        products={mockProducts}
-        className="mt-4"
-        onSubmitNewMovementClick={(product) => {
-          console.log('new movement click')
-          console.log(product)
-        }}
-      />
+      <ProductTable products={mockProducts} className="mt-4" />
     </section>
   )
 }

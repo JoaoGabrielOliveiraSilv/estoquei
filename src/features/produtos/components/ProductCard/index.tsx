@@ -1,7 +1,7 @@
 import { LayersPlus, RotateCcw, SquarePen, Trash } from 'lucide-react'
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 
-import NewMovementsModal from '@/features/inventory-movements/components/new-movements-modal'
+import { useNewInventoryMovementModal } from '@/features/inventory-movements/hooks/use-new-inventory-movement-modal'
 import { Button } from '@/shared/components/ui/Button'
 import { DotInfo } from '@/shared/components/ui/DotInfo'
 import { cn } from '@/shared/utils/cn'
@@ -15,19 +15,13 @@ export default function ProductCard({
   product,
   gridProps,
   containerClassName,
-  onSubmitNewMovementClick,
 }: IProductCardProps) {
   const { quantity: quantityStyle, status: statusStyle } = variants[status]
-  const [isNewMovementsModalOpen, setIsNewMovementsModalOpen] = useState(false)
+  const { openNewInventoryMovementModal } = useNewInventoryMovementModal()
 
-  const handleSubmitNewMovementClick = useCallback(() => {
-    setIsNewMovementsModalOpen(true)
-  }, [])
-
-  const handleSubmitNewMovement = useCallback(() => {
-    onSubmitNewMovementClick?.(product)
-    setIsNewMovementsModalOpen(false)
-  }, [onSubmitNewMovementClick, product])
+  const handleNewMovementClick = useCallback(() => {
+    openNewInventoryMovementModal(product)
+  }, [product, openNewInventoryMovementModal])
 
   return (
     <div
@@ -75,13 +69,7 @@ export default function ProductCard({
 
         {/* Buttons */}
         <div className="flex items-center gap-2">
-          <NewMovementsModal
-            product={product}
-            open={isNewMovementsModalOpen}
-            onClose={() => setIsNewMovementsModalOpen(false)}
-            onSubmit={handleSubmitNewMovement}
-          />
-          <Button variant="ghost" size="icon" onClick={handleSubmitNewMovementClick}>
+          <Button variant="ghost" size="icon" onClick={handleNewMovementClick}>
             <LayersPlus size={16} />
           </Button>
           <Button variant="ghost" size="icon">
