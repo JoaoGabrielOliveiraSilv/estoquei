@@ -2,7 +2,6 @@ import { Plus } from 'lucide-react'
 import { useState } from 'react'
 
 import { Button } from '@/shared/components/ui/Button'
-import { buttonVariants } from '@/shared/components/ui/Button/variants'
 import { Input } from '@/shared/components/ui/Input'
 import Modal from '@/shared/components/ui/Modal/index'
 import { Textarea } from '@/shared/components/ui/Textarea'
@@ -43,19 +42,16 @@ const ICON_ITEMS = {
 }
 
 export default function ProductModal({ open, onClose }: IProductModalProps) {
-  if (!open) return null
-
   const [selectedIconItem, setSelectedIconItem] = useState<keyof typeof ICON_ITEMS | null>(null)
+
+  if (!open) return null
 
   const sectionTitleStyle = cn(
     'text-estoquei-text3 text-[13px] font-medium uppercase',
     'tracking-[.08em]'
   )
 
-  const handleIconItemClick = (
-    iconItem: (typeof ICON_ITEMS)[keyof typeof ICON_ITEMS],
-    iconKey: keyof typeof ICON_ITEMS
-  ) => {
+  const handleIconItemClick = (iconKey: keyof typeof ICON_ITEMS) => {
     setSelectedIconItem(iconKey)
   }
 
@@ -87,7 +83,7 @@ export default function ProductModal({ open, onClose }: IProductModalProps) {
                 variant={selectedIconItem == iconKey ? 'accent' : 'ghost'}
                 size="icon"
                 className="w-[38px] h-[38px] text-[28px]"
-                onClick={() => handleIconItemClick(iconItem, iconKey as keyof typeof ICON_ITEMS)}
+                onClick={() => handleIconItemClick(iconKey as keyof typeof ICON_ITEMS)}
               >
                 {iconItem.emoji}
               </Button>
