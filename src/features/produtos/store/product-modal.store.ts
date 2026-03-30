@@ -5,7 +5,6 @@ import type { Product } from '@/shared/types/product'
 interface IProductModalState {
   isOpen: boolean
   product?: Product
-  // eslint-disable-next-line no-unused-vars -- parameter names document the callback API
   open: (product?: Product) => void
   close: () => void
 }
