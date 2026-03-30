@@ -1,30 +1,45 @@
+import { LayersPlus, PackagePlus } from 'lucide-react'
+import { useState } from 'react'
+import { Outlet } from 'react-router'
+
+import ProductModal from '@/features/produtos/components/ProductModal'
 import MobileFooter from '@/shared/components/layout/MobileFooter'
 import PageHeader from '@/shared/components/layout/PageHeader'
 import SideBar from '@/shared/components/layout/SideBar'
-import { LayersPlus, PackagePlus } from 'lucide-react'
-import { Outlet } from 'react-router'
+
 import type { IAppLayoutProps } from './types'
 
-const MENU_ITEMS = [
-  {
-    label: 'Novo Produto',
-    icon: PackagePlus,
-    onClick: () => {
-      console.log('Novo Produto')
-    },
-  },
-  {
-    label: 'Nova movimentação',
-    icon: LayersPlus,
-    onClick: () => {
-      console.log('Nova movimentação')
-    },
-  },
-]
+
 
 export function AppLayout({ headerTitle }: IAppLayoutProps) {
+  const [isNewProductModalOpen, setIsNewProductModalOpen] = useState(false)
+
+  const handleNewProductModalOpen = () => {
+    setIsNewProductModalOpen(true)
+  }
+
+  const handleNewProductModalClose = () => {
+    setIsNewProductModalOpen(false)
+  }
+
+  const MENU_ITEMS = [
+    {
+      label: 'Novo Produto',
+      icon: PackagePlus,
+      onClick: handleNewProductModalOpen,
+    },
+    {
+      label: 'Nova movimentação',
+      icon: LayersPlus,
+      onClick: () => {
+        console.log('Nova movimentação')
+      },
+    },
+  ]
+
   return (
     <div className="flex h-screen bg-estoquei-bg">
+      <ProductModal open={isNewProductModalOpen} onClose={handleNewProductModalClose} />
       <SideBar items={MENU_ITEMS} />
       <MobileFooter items={MENU_ITEMS} />
 

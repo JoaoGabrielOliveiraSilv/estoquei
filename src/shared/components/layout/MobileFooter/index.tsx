@@ -1,6 +1,8 @@
 import { cn } from '@/shared/utils/cn'
-import type { IBottomNavProps } from './types'
+
 import { Button } from '../../ui/Button'
+
+import type { IBottomNavProps } from './types'
 
 export default function MobileFooter({ items, className }: IBottomNavProps) {
   return (

@@ -1,7 +1,10 @@
-import { cn } from '@/shared/utils/cn'
-import type { ISideBarProps } from './types'
 import { Package } from 'lucide-react'
+
+import { cn } from '@/shared/utils/cn'
+
 import { Button } from '../../ui/Button'
+
+import type { ISideBarProps } from './types'
 
 export default function Sidebar({ items, className, ...props }: ISideBarProps) {
   return (

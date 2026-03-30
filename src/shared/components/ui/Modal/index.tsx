@@ -1,15 +1,19 @@
-import { cn } from '@/shared/utils/cn'
 import { X } from 'lucide-react'
+
+import { cn } from '@/shared/utils/cn'
+
 import { Button } from '../Button'
+
 import type { IModalProps } from './types'
 
-export default function Modal({ open, title, children, footer, onClose }: IModalProps) {
+export default function Modal({ open, title, children, footer, onClose, ...props }: IModalProps) {
   if (!open) {
     return null
   }
 
   return (
     <div
+      {...props}
       className={cn(
         'fixed inset-0 z-[100]',
         'bg-black/75',

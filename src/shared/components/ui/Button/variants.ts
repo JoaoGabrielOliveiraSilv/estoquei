@@ -6,6 +6,7 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         'ghost': 'bg-estoquei-bg2 text-estoquei-text2 border border-estoquei-border hover:bg-estoquei-bg3',
+        'accent': 'text-estoquei-bg2 border border-estoquei-accent hover:bg-estoquei-accent2 bg-estoquei-accent',
       },
       size: {
         icon: 'w-7 h-7',

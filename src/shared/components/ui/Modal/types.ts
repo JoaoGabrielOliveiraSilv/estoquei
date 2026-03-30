@@ -1,4 +1,4 @@
-export interface IModalProps {
+export interface IModalProps extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean
   title?: string
   children?: React.ReactNode
