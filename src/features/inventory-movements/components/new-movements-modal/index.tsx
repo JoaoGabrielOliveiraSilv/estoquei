@@ -29,7 +29,7 @@ export default function NewInventoryMovementsModal({
     onClose?.()
   }, [closeNewInventoryMovementModal, onSubmit, onClose])
 
-  if (!open || !product) return null
+  if (!open || !product.id) return null
 
   return (
     <Modal
@@ -49,12 +49,12 @@ export default function NewInventoryMovementsModal({
       }
     >
       <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
-        {/* Movement type section */}
         <ModalSection title="Tipo" className="w-full">
-          <div className="flex items-center w-full justify-between gap-2">
+          <div className="flex w-full items-center justify-between gap-2">
             <Button
               variant={movementType === 'inbound' ? 'green-selected' : 'ghost'}
               className="w-full"
+              type="button"
               onClick={() => setMovementType('inbound')}
             >
               <ArrowUp size={16} />
@@ -63,6 +63,7 @@ export default function NewInventoryMovementsModal({
             <Button
               variant={movementType === 'outbound' ? 'red-selected' : 'ghost'}
               className="w-full"
+              type="button"
               onClick={() => setMovementType('outbound')}
             >
               <ArrowDown size={16} />
@@ -71,8 +72,7 @@ export default function NewInventoryMovementsModal({
           </div>
         </ModalSection>
 
-        {/* Quantity section */}
-        <div className="flex items-center w-full justify-between gap-2">
+        <div className="flex w-full items-center justify-between gap-2">
           <ModalSection title="Quantidade *" className="w-full">
             <Input
               type="number"
@@ -93,7 +93,6 @@ export default function NewInventoryMovementsModal({
           </ModalSection>
         </div>
 
-        {/* Counterparty section */}
         <ModalSection title={counterparty} className="w-full">
           <Input type="text" placeholder={`Digite o nome do ${counterparty}`} />
         </ModalSection>

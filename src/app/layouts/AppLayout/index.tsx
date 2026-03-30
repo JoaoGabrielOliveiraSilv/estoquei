@@ -1,8 +1,9 @@
 import { PackagePlus } from 'lucide-react'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo } from 'react'
 import { Outlet } from 'react-router'
 
 import NewInventoryMovementsModal from '@/features/inventory-movements/components/new-movements-modal'
+import { useProductModal } from '@/features/produtos'
 import ProductModal from '@/features/produtos/components/ProductModal'
 import MobileFooter from '@/shared/components/layout/MobileFooter'
 import PageHeader from '@/shared/components/layout/PageHeader'
@@ -13,15 +14,20 @@ import type { IAppLayoutProps } from './types'
 
 export function AppLayout({ headerTitle }: IAppLayoutProps) {
   const { isNewInventoryMovementModalOpen } = useNewInventoryMovementModal()
-  const [isNewProductModalOpen, setIsNewProductModalOpen] = useState(false)
+  const {
+    close: closeProductModal,
+    open: openProductModal,
+    isOpen: isProductModalOpen,
+    product: productToEdit,
+  } = useProductModal()
 
   const handleNewProductModalOpen = useCallback(() => {
-    setIsNewProductModalOpen(true)
-  }, [])
+    openProductModal()
+  }, [openProductModal])
 
-  const handleNewProductModalClose = useCallback(() => {
-    setIsNewProductModalOpen(false)
-  }, [])
+  const handleProductModalClose = useCallback(() => {
+    closeProductModal()
+  }, [closeProductModal])
 
   const MENU_ITEMS = useMemo(
     () => [
@@ -37,7 +43,11 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
   return (
     <div className="flex h-screen bg-estoquei-bg">
       <NewInventoryMovementsModal open={isNewInventoryMovementModalOpen} />
-      <ProductModal open={isNewProductModalOpen} onClose={handleNewProductModalClose} />
+      <ProductModal
+        open={isProductModalOpen}
+        product={productToEdit}
+        onClose={handleProductModalClose}
+      />
       <SideBar items={MENU_ITEMS} />
       <MobileFooter items={MENU_ITEMS} />
 

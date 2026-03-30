@@ -1,6 +1,7 @@
 import { LayersPlus, RotateCcw, SquarePen, Trash } from 'lucide-react'
 import { useCallback } from 'react'
 
+import { useProductModal } from '@/features/produtos/hooks/use-product-modal'
 import { Button } from '@/shared/components/ui/Button'
 import { DotInfo } from '@/shared/components/ui/DotInfo'
 import { useNewInventoryMovementModal } from '@/shared/hooks/use-new-inventory-movement-modal'
@@ -12,11 +13,16 @@ import type { IProductCardProps } from './types'
 
 export default function ProductCard({ product, gridProps, containerClassName }: IProductCardProps) {
   const { openNewInventoryMovementModal } = useNewInventoryMovementModal()
+  const { open: openProductModal } = useProductModal()
   const { quantity: quantityStyle, status: statusStyle } = variants[product.status]
 
   const handleNewMovementClick = useCallback(() => {
     openNewInventoryMovementModal(product)
   }, [product, openNewInventoryMovementModal])
+
+  const handleEditProductClick = useCallback(() => {
+    openProductModal(product)
+  }, [product, openProductModal])
 
   return (
     <div
@@ -29,7 +35,6 @@ export default function ProductCard({ product, gridProps, containerClassName }: 
       )}
     >
       <div className="flex items-center justify-between md:contents">
-        {/* ItemInfo */}
         <div className="flex items-center gap-2">
           <div className="w-10 h-10 rounded-lg bg-estoquei-bg3 border border-estoquei-border flex items-center justify-center">
             {product.icon}
@@ -40,7 +45,6 @@ export default function ProductCard({ product, gridProps, containerClassName }: 
           </div>
         </div>
 
-        {/* Quantity */}
         <div className="flex items-center gap-2">
           <span
             className={cn(quantityStyle.textColor, 'text-xl md:text-sm px-1')}
@@ -49,7 +53,6 @@ export default function ProductCard({ product, gridProps, containerClassName }: 
       </div>
 
       <div className="flex items-center justify-between md:contents">
-        {/* Status */}
         <DotInfo
           dotColor={statusStyle.dot}
           spanClassName={cn(statusStyle.textColor, 'text-xs')}
@@ -62,7 +65,6 @@ export default function ProductCard({ product, gridProps, containerClassName }: 
           {statusStyle.text}
         </DotInfo>
 
-        {/* Buttons */}
         <div className="flex items-center gap-2">
           <Button variant="ghost" size="icon" onClick={handleNewMovementClick}>
             <LayersPlus size={16} />
@@ -70,7 +72,7 @@ export default function ProductCard({ product, gridProps, containerClassName }: 
           <Button variant="ghost" size="icon">
             <RotateCcw size={16} />
           </Button>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" onClick={handleEditProductClick}>
             <SquarePen size={16} />
           </Button>
           <Button variant="ghost" size="icon">

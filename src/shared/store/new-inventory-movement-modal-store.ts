@@ -11,6 +11,7 @@ interface NewInventoryMovementModalState {
 
 const initialProduct: Product = {
   id: '',
+  emoji: 'beer',
   icon: null,
   name: '',
   description: '',
