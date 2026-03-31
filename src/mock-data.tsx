@@ -1,6 +1,6 @@
 import { LayersPlus } from "lucide-react";
 
-import type { InventoryMovement } from "./shared/types/inventory-moment";
+import type { InventoryMovement } from './shared/types/inventory-movement'
 
 export const mockProductStats = {
   total: {

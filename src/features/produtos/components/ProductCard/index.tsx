@@ -1,11 +1,11 @@
 import { LayersPlus, RotateCcw, SquarePen, Trash } from 'lucide-react'
 import { useCallback } from 'react'
 
-import { useHistoryMovementModal } from '@/features/inventory-movements/hooks/history-movement-modal.hooks'
 import { useProductModal } from '@/features/produtos/hooks/use-product-modal'
 import { mockInventoryMovements } from '@/mock-data'
 import { Button } from '@/shared/components/ui/Button'
 import { DotInfo } from '@/shared/components/ui/DotInfo'
+import { useHistoryMovementModal } from '@/shared/hooks/use-history-movement-modal'
 import { useNewInventoryMovementModal } from '@/shared/hooks/use-new-inventory-movement-modal'
 import { cn } from '@/shared/utils/cn'
 

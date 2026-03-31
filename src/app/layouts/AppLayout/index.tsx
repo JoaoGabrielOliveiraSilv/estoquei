@@ -4,12 +4,12 @@ import { Outlet } from 'react-router'
 
 import HistoryMovementsModal from '@/features/inventory-movements/components/history-movements-modal'
 import NewInventoryMovementsModal from '@/features/inventory-movements/components/new-movements-modal'
-import { useHistoryMovementModal } from '@/features/inventory-movements/hooks/history-movement-modal.hooks'
 import { useProductModal } from '@/features/produtos'
 import ProductModal from '@/features/produtos/components/ProductModal'
 import MobileFooter from '@/shared/components/layout/MobileFooter'
 import PageHeader from '@/shared/components/layout/PageHeader'
 import SideBar from '@/shared/components/layout/SideBar'
+import { useHistoryMovementModal } from '@/shared/hooks/use-history-movement-modal'
 import { useNewInventoryMovementModal } from '@/shared/hooks/use-new-inventory-movement-modal'
 
 import type { IAppLayoutProps } from './types'
@@ -22,9 +22,7 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
     isOpen: isProductModalOpen,
     product: productToEdit,
   } = useProductModal()
-  const {
-    closeHistoryMovementModal,
-  } = useHistoryMovementModal()
+  const { closeHistoryMovementModal } = useHistoryMovementModal()
 
   const handleNewProductModalOpen = useCallback(() => {
     openProductModal()
@@ -33,10 +31,6 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
   const handleProductModalClose = useCallback(() => {
     closeProductModal()
   }, [closeProductModal])
-
-  const handleHistoryMovementModalClose = useCallback(() => {
-    closeHistoryMovementModal()
-  }, [closeHistoryMovementModal])
 
   const MENU_ITEMS = useMemo(
     () => [
@@ -51,7 +45,7 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
 
   return (
     <div className="flex h-screen bg-estoquei-bg">
-      <HistoryMovementsModal onClose={handleHistoryMovementModalClose} />
+      <HistoryMovementsModal onClose={closeHistoryMovementModal} />
       <NewInventoryMovementsModal open={isNewInventoryMovementModalOpen} />
       <ProductModal
         open={isProductModalOpen}

@@ -2,12 +2,10 @@ import { ArrowDown, ArrowUp } from 'lucide-react'
 import { useCallback } from 'react'
 
 import Modal from '@/shared/components/ui/Modal'
+import { useHistoryMovementModal } from '@/shared/hooks/use-history-movement-modal'
 import { cn } from '@/shared/utils/cn'
 
-import { useHistoryMovementModal } from '../../hooks/history-movement-modal.hooks'
-
 import type { IHistoryMovementsModalProps } from './types'
-
 
 export default function HistoryMovementsModal({ onClose }: IHistoryMovementsModalProps) {
   const { isHistoryMovementModalOpen, product, movements, closeHistoryMovementModal } =
@@ -50,14 +48,13 @@ export default function HistoryMovementsModal({ onClose }: IHistoryMovementsModa
               </span>
               <span className="text-estoquei-text3 text-[12px]">{movement.date}</span>
             </div>
-            <div
-              className={cn(
-                isInbound ? 'text-estoquei-green' : 'text-estoquei-danger',
-                'text-estoquei-text text-sm',
-                'ml-auto shrink-0 pr-2'
-              )}
-            >
-              <span className={cn(isInbound ? 'text-estoquei-green' : 'text-estoquei-danger')}>
+            <div className="ml-auto shrink-0 pr-2">
+              <span
+                className={cn(
+                  'text-sm tabular-nums',
+                  isInbound ? 'text-estoquei-green' : 'text-estoquei-danger'
+                )}
+              >
                 {isInbound ? '+' : '-'}
                 {movement.quantity}
               </span>
