@@ -13,7 +13,12 @@ import { variants } from './variants'
 
 import type { IProductCardProps } from './types'
 
-export default function ProductCard({ product, gridProps, containerClassName }: IProductCardProps) {
+export default function ProductCard({
+  product,
+  gridProps,
+  containerClassName,
+  onRequestDeleteProduct,
+}: IProductCardProps) {
   const { openNewInventoryMovementModal } = useNewInventoryMovementModal()
   const { open: openProductModal } = useProductModal()
   const { openHistoryMovementModal } = useHistoryMovementModal()
@@ -30,6 +35,10 @@ export default function ProductCard({ product, gridProps, containerClassName }: 
   const handleHistoryMovementClick = useCallback(() => {
     openHistoryMovementModal(product, mockInventoryMovements)
   }, [product, openHistoryMovementModal])
+
+  const handleDeleteClick = useCallback(() => {
+    onRequestDeleteProduct?.(product)
+  }, [onRequestDeleteProduct, product])
 
   return (
     <div
@@ -82,7 +91,7 @@ export default function ProductCard({ product, gridProps, containerClassName }: 
           <Button variant="ghost" size="icon" onClick={handleEditProductClick}>
             <SquarePen size={16} />
           </Button>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" onClick={handleDeleteClick} aria-label="Excluir produto">
             <Trash size={16} />
           </Button>
         </div>
