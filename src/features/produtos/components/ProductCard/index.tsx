@@ -1,7 +1,7 @@
 import { LayersPlus, RotateCcw, SquarePen, Trash } from 'lucide-react'
 import { useCallback } from 'react'
 
-import { useProductModal } from '@/features/produtos/hooks/use-product-modal'
+import { useProductModal } from '@/features/produtos/hooks'
 import { mockInventoryMovements } from '@/mock-data'
 import { Button } from '@/shared/components/ui/Button'
 import { DotInfo } from '@/shared/components/ui/DotInfo'

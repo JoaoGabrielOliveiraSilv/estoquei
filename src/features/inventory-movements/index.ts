@@ -1,6 +1,3 @@
-// Public exports for the lotes feature boundary.
-export { default as LoteHistorico } from './components/LoteHistorico'
-export { default as LoteModal } from './components/LoteModal'
-export { useLoteMutations } from './hooks/useLoteMutations'
-export { useLotes } from './hooks/useLotes'
-export type { CreateLoteDTO, Lote, TipoLote } from './types'
+// Public exports for the inventory-movements feature boundary (consumers: app, other features).
+export { default as HistoryMovementsModal } from './components/history-movements-modal'
+export { default as NewInventoryMovementsModal } from './components/new-movements-modal'

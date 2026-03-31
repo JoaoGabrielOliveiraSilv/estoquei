@@ -1,7 +1,7 @@
 // Application route declarations with basic fallback page.
 import { Routes, Route } from 'react-router-dom'
 
-import ProductListPage from '@/features/produtos/pages/ProductList'
+import { ProductListPage } from '@/features/produtos'
 
 import { AppLayout } from '../layouts/AppLayout'
 
