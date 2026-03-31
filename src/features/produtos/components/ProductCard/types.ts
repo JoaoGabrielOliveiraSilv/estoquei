@@ -1,4 +1,4 @@
-import type { Product, ProductCardStatus } from "../shared/types"
+import type { Product, ProductCardStatus } from '@/shared/types/product'
 
 type StatusStyle = {
   border: string

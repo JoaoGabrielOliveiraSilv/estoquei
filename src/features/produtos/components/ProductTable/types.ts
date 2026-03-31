@@ -1,4 +1,4 @@
-import type { Product } from '../shared/types'
+import type { Product } from '@/shared/types/product'
 
 export interface IProductTableProps extends React.HTMLAttributes<HTMLDivElement> {
   products: Product[]
