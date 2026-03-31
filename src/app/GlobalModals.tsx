@@ -1,5 +1,3 @@
-import { useCallback } from 'react'
-
 import { ProductModal, useProductModal } from '@/features/produtos'
 
 /**
@@ -12,15 +10,7 @@ export function GlobalModals() {
     product: productToEdit,
   } = useProductModal()
 
-  const handleProductModalClose = useCallback(() => {
-    closeProductModal()
-  }, [closeProductModal])
-
   return (
-    <ProductModal
-      open={isProductModalOpen}
-      product={productToEdit}
-      onClose={handleProductModalClose}
-    />
+    <ProductModal open={isProductModalOpen} product={productToEdit} onClose={closeProductModal} />
   )
 }
