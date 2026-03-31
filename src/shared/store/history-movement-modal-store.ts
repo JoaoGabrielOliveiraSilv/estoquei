@@ -26,5 +26,5 @@ export const useHistoryMovementModalStore = create<HistoryMovementModalState>((s
   product: initialProduct,
   movements: [],
   open: (product, movements) => set({ isOpen: true, product, movements }),
-  close: () => set({ isOpen: false, movements: [] }),
+  close: () => set({ isOpen: false, movements: [], product: initialProduct }),
 }))
