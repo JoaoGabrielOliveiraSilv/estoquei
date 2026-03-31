@@ -108,7 +108,6 @@ export default function ProductCard({
         </div>
       </div>
 
-      {/* TODO: elevar modal para o pai (uma instância no DOM em vez de um por card). */}
       <Modal
         open={isDeleteModalOpen}
         title="Excluir produto?"
