@@ -1,4 +1,4 @@
-import { useNewInventoryMovementModalStore } from '@/shared/store/new-inventory-movement-modal-store'
+import { useNewInventoryMovementModalStore } from '../store/new-inventory-movement-modal.store'
 
 export function useNewInventoryMovementModal() {
   const isNewInventoryMovementModalOpen = useNewInventoryMovementModalStore((s) => s.isOpen)

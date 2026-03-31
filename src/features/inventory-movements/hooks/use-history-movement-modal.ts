@@ -1,4 +1,4 @@
-import { useHistoryMovementModalStore } from '@/shared/store/history-movement-modal-store'
+import { useHistoryMovementModalStore } from '../store/history-movement-modal.store'
 
 export function useHistoryMovementModal() {
   const isHistoryMovementModalOpen = useHistoryMovementModalStore((s) => s.isOpen)

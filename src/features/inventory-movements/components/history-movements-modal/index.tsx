@@ -2,8 +2,9 @@ import { ArrowDown, ArrowUp } from 'lucide-react'
 import { useCallback } from 'react'
 
 import Modal from '@/shared/components/ui/Modal'
-import { useHistoryMovementModal } from '@/shared/hooks/use-history-movement-modal'
 import { cn } from '@/shared/utils/cn'
+
+import { useHistoryMovementModal } from '../../hooks/use-history-movement-modal'
 
 import type { IHistoryMovementsModalProps } from './types'
 
