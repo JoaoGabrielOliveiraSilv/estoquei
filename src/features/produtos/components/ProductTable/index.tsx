@@ -7,7 +7,7 @@ import ProductCard from '../ProductCard/index.tsx'
 
 import type { IProductTableProps } from './types.ts'
 
-export default function ProductTable({ products, onDeleteProduct, ...props }: IProductTableProps) {
+export default function ProductTable({ products, onRequestDeleteProduct, ...props }: IProductTableProps) {
   return (
     <div className="bg-estoquei-bg gap-2" {...props}>
       <div className="relative mb-3">
@@ -40,7 +40,7 @@ export default function ProductTable({ products, onDeleteProduct, ...props }: IP
           <ProductCard
             key={product.id}
             product={product}
-            onDeleteProduct={onDeleteProduct}
+            onRequestDeleteProduct={onRequestDeleteProduct}
             gridProps={'flex flex-col gap-3 md:grid md:grid-cols-[2fr_1fr_1fr_1fr] md:items-center'}
             containerClassName={cn(
               'border border-estoquei-border rounded-lg md:border-x-0 md:border-b-0 md:rounded-none'

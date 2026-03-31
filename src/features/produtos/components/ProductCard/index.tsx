@@ -1,11 +1,10 @@
 import { LayersPlus, RotateCcw, SquarePen, Trash } from 'lucide-react'
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 
 import { useProductModal } from '@/features/produtos/hooks/use-product-modal'
 import { mockInventoryMovements } from '@/mock-data'
 import { Button } from '@/shared/components/ui/Button'
 import { DotInfo } from '@/shared/components/ui/DotInfo'
-import Modal from '@/shared/components/ui/Modal'
 import { useHistoryMovementModal } from '@/shared/hooks/use-history-movement-modal'
 import { useNewInventoryMovementModal } from '@/shared/hooks/use-new-inventory-movement-modal'
 import { cn } from '@/shared/utils/cn'
@@ -18,9 +17,8 @@ export default function ProductCard({
   product,
   gridProps,
   containerClassName,
-  onDeleteProduct,
+  onRequestDeleteProduct,
 }: IProductCardProps) {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const { openNewInventoryMovementModal } = useNewInventoryMovementModal()
   const { open: openProductModal } = useProductModal()
   const { openHistoryMovementModal } = useHistoryMovementModal()
@@ -38,18 +36,9 @@ export default function ProductCard({
     openHistoryMovementModal(product, mockInventoryMovements)
   }, [product, openHistoryMovementModal])
 
-  const handleOpenDeleteModal = useCallback(() => {
-    setIsDeleteModalOpen(true)
-  }, [])
-
-  const handleCloseDeleteModal = useCallback(() => {
-    setIsDeleteModalOpen(false)
-  }, [])
-
-  const handleConfirmDelete = useCallback(() => {
-    onDeleteProduct?.(product)
-    setIsDeleteModalOpen(false)
-  }, [onDeleteProduct, product])
+  const handleDeleteClick = useCallback(() => {
+    onRequestDeleteProduct?.(product)
+  }, [onRequestDeleteProduct, product])
 
   return (
     <div
@@ -102,36 +91,11 @@ export default function ProductCard({
           <Button variant="ghost" size="icon" onClick={handleEditProductClick}>
             <SquarePen size={16} />
           </Button>
-          <Button variant="ghost" size="icon" onClick={handleOpenDeleteModal} aria-label="Excluir produto">
+          <Button variant="ghost" size="icon" onClick={handleDeleteClick} aria-label="Excluir produto">
             <Trash size={16} />
           </Button>
         </div>
       </div>
-
-      <Modal
-        open={isDeleteModalOpen}
-        title="Excluir produto?"
-        onClose={handleCloseDeleteModal}
-        footer={
-          <div className="flex justify-end gap-2">
-            <Button variant="ghost" onClick={handleCloseDeleteModal}>
-              Cancelar
-            </Button>
-            <Button
-              variant="ghost"
-              className="border-estoquei-danger/50 text-estoquei-danger hover:bg-estoquei-danger/10"
-              onClick={handleConfirmDelete}
-            >
-              Excluir
-            </Button>
-          </div>
-        }
-      >
-        <p className="text-estoquei-text2 text-sm">
-          Tem certeza que deseja excluir <span className="text-estoquei-text font-medium">{product.name}</span>
-          ? Essa ação não pode ser desfeita.
-        </p>
-      </Modal>
     </div>
   )
 }
