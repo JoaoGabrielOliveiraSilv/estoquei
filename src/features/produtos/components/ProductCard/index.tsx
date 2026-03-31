@@ -1,9 +1,7 @@
 import { LayersPlus, RotateCcw, SquarePen, Trash } from 'lucide-react'
 import { useCallback } from 'react'
 
-import { useHistoryMovementModal, useNewInventoryMovementModal } from '@/features/inventory-movements/hooks'
 import { useProductModal } from '@/features/produtos/hooks'
-import { mockInventoryMovements } from '@/mock-data'
 import { Button } from '@/shared/components/ui/Button'
 import { DotInfo } from '@/shared/components/ui/DotInfo'
 import { cn } from '@/shared/utils/cn'
@@ -17,23 +15,23 @@ export default function ProductCard({
   gridProps,
   containerClassName,
   onRequestDeleteProduct,
+  onNewMovement,
+  onOpenMovementHistory,
 }: IProductCardProps) {
-  const { openNewInventoryMovementModal } = useNewInventoryMovementModal()
   const { open: openProductModal } = useProductModal()
-  const { openHistoryMovementModal } = useHistoryMovementModal()
   const { quantity: quantityStyle, status: statusStyle } = variants[product.status]
 
   const handleNewMovementClick = useCallback(() => {
-    openNewInventoryMovementModal(product)
-  }, [product, openNewInventoryMovementModal])
+    onNewMovement?.(product)
+  }, [onNewMovement, product])
 
   const handleEditProductClick = useCallback(() => {
     openProductModal(product)
   }, [product, openProductModal])
 
   const handleHistoryMovementClick = useCallback(() => {
-    openHistoryMovementModal(product, mockInventoryMovements)
-  }, [product, openHistoryMovementModal])
+    onOpenMovementHistory?.(product)
+  }, [onOpenMovementHistory, product])
 
   const handleDeleteClick = useCallback(() => {
     onRequestDeleteProduct?.(product)

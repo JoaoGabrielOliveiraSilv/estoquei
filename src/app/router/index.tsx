@@ -1,7 +1,7 @@
 // Application route declarations with basic fallback page.
 import { Routes, Route } from 'react-router-dom'
 
-import { ProductListPage } from '@/features/produtos'
+import ProductCatalogPage from '@/app/pages/ProductCatalogPage'
 
 import { AppLayout } from '../layouts/AppLayout'
 
@@ -13,7 +13,7 @@ const ROUTES = [
   {
     path: '/',
     headerTitle: 'Produtos',
-    element: <ProductListPage />,
+    element: <ProductCatalogPage />,
   },
 ]
 

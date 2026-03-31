@@ -83,7 +83,7 @@ module.exports = [
       ],
       // import/no-restricted-paths (eslint-plugin-import): `target` = current file glob;
       // `from` = glob of resolved import paths that must not be imported from those files.
-      // shared is leaf; features must not import app; cross-feature only via sibling index.ts or inventory-movements/hooks.
+      // shared is leaf; features must not import app; zero cross-feature (compose in app).
       'import/no-restricted-paths': [
         'error',
         {
@@ -102,11 +102,7 @@ module.exports = [
             },
             {
               target: './src/features/produtos/**/*',
-              from: './src/features/inventory-movements/components/**/*',
-            },
-            {
-              target: './src/features/produtos/**/*',
-              from: './src/features/inventory-movements/store/**/*',
+              from: './src/features/inventory-movements/**/*',
             },
             {
               target: './src/features/inventory-movements/**/*',

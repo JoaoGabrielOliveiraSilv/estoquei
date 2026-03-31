@@ -21,4 +21,6 @@ export interface IProductCardProps {
   gridProps: React.HTMLAttributes<HTMLDivElement>['className']
   containerClassName?: React.HTMLAttributes<HTMLDivElement>['className']
   onRequestDeleteProduct?: (product: Product) => void
+  onNewMovement?: (product: Product) => void
+  onOpenMovementHistory?: (product: Product) => void
 }
