@@ -1,6 +1,12 @@
 // Root app component that renders application routes.
+import { GlobalModals } from './GlobalModals'
 import { AppRouter } from './router'
 
 export function App() {
-  return <AppRouter />
+  return (
+    <>
+      <GlobalModals />
+      <AppRouter />
+    </>
+  )
 }

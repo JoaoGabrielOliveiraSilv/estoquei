@@ -6,8 +6,6 @@ import {
   useHistoryMovementModal,
   useNewInventoryMovementModal,
 } from '@/features/inventory-movements'
-import ProductModal from '@/features/produtos/components/ProductModal'
-import { useProductModal } from '@/features/produtos/hooks'
 import { mockProducts, mockProductStats } from '@/mock-data'
 import { Button } from '@/shared/components/ui/Button'
 import Modal from '@/shared/components/ui/Modal'
@@ -21,16 +19,7 @@ export default function ProductListPage() {
   const [productPendingDelete, setProductPendingDelete] = useState<Product | null>(null)
 
   const { isNewInventoryMovementModalOpen } = useNewInventoryMovementModal()
-  const {
-    close: closeProductModal,
-    isOpen: isProductModalOpen,
-    product: productToEdit,
-  } = useProductModal()
   const { closeHistoryMovementModal } = useHistoryMovementModal()
-
-  const handleProductModalClose = useCallback(() => {
-    closeProductModal()
-  }, [closeProductModal])
 
   const handleDeleteProduct = useCallback((product: Product) => {
     setProducts((prev) => prev.filter((p) => p.id !== product.id))
@@ -96,11 +85,6 @@ export default function ProductListPage() {
 
       <HistoryMovementsModal onClose={closeHistoryMovementModal} />
       <NewInventoryMovementsModal open={isNewInventoryMovementModalOpen} />
-      <ProductModal
-        open={isProductModalOpen}
-        product={productToEdit}
-        onClose={handleProductModalClose}
-      />
     </>
   )
 }
