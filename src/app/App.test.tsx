@@ -12,6 +12,6 @@ describe('App', () => {
       </AppProviders>
     )
 
-    expect(screen.getByText('Lista de produtos')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Produtos' })).toBeInTheDocument()
   })
 })

@@ -1,10 +1,8 @@
-// Public exports for the produtos feature boundary.
+// Public exports for the produtos feature boundary (consumers: app, other features).
 export { default as ProductCard } from './components/ProductCard'
-export { default as ProdutoModal } from './components/ProductModal'
+export { default as ProductModal } from './components/ProductModal'
 export { default as ProductStats } from './components/ProductStats'
-export { default as ProdutoTabela } from './components/ProductTable'
-export { useProductModal } from './hooks/use-product-modal'
+export { default as ProductTable } from './components/ProductTable'
+export { default as ProductListPage } from './pages/ProductList'
+export { useProductModal } from './hooks'
 export { useProductModalStore } from './store/product-modal.store'
-export { useProdutoMutations } from './hooks/useProdutoMutations'
-export { useProdutos } from './hooks/useProdutos'
-export type { CreateProdutoDTO, Produto } from './types'
