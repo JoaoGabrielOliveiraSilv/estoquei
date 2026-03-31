@@ -2,7 +2,9 @@ import { PackagePlus } from 'lucide-react'
 import { useCallback, useMemo } from 'react'
 import { Outlet } from 'react-router'
 
+import HistoryMovementsModal from '@/features/inventory-movements/components/history-movements-modal'
 import NewInventoryMovementsModal from '@/features/inventory-movements/components/new-movements-modal'
+import { useHistoryMovementModal } from '@/features/inventory-movements/hooks/history-movement-modal.hooks'
 import { useProductModal } from '@/features/produtos'
 import ProductModal from '@/features/produtos/components/ProductModal'
 import MobileFooter from '@/shared/components/layout/MobileFooter'
@@ -20,6 +22,9 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
     isOpen: isProductModalOpen,
     product: productToEdit,
   } = useProductModal()
+  const {
+    closeHistoryMovementModal,
+  } = useHistoryMovementModal()
 
   const handleNewProductModalOpen = useCallback(() => {
     openProductModal()
@@ -28,6 +33,10 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
   const handleProductModalClose = useCallback(() => {
     closeProductModal()
   }, [closeProductModal])
+
+  const handleHistoryMovementModalClose = useCallback(() => {
+    closeHistoryMovementModal()
+  }, [closeHistoryMovementModal])
 
   const MENU_ITEMS = useMemo(
     () => [
@@ -42,6 +51,7 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
 
   return (
     <div className="flex h-screen bg-estoquei-bg">
+      <HistoryMovementsModal onClose={handleHistoryMovementModalClose} />
       <NewInventoryMovementsModal open={isNewInventoryMovementModalOpen} />
       <ProductModal
         open={isProductModalOpen}
