@@ -81,6 +81,85 @@ module.exports = [
           },
         },
       ],
+      // import/no-restricted-paths (eslint-plugin-import): `target` = current file glob;
+      // `from` = glob of resolved import paths that must not be imported from those files.
+      // shared is leaf; features must not import app; cross-feature only via sibling index.ts or inventory-movements/hooks.
+      'import/no-restricted-paths': [
+        'error',
+        {
+          zones: [
+            {
+              target: './src/shared/**/*',
+              from: './src/features/**/*',
+            },
+            {
+              target: './src/shared/**/*',
+              from: './src/app/**/*',
+            },
+            {
+              target: './src/features/**/*',
+              from: './src/app/**/*',
+            },
+            {
+              target: './src/features/produtos/**/*',
+              from: './src/features/inventory-movements/components/**/*',
+            },
+            {
+              target: './src/features/produtos/**/*',
+              from: './src/features/inventory-movements/store/**/*',
+            },
+            {
+              target: './src/features/inventory-movements/**/*',
+              from: './src/features/produtos/components/**/*',
+            },
+            {
+              target: './src/features/inventory-movements/**/*',
+              from: './src/features/produtos/store/**/*',
+            },
+            {
+              target: './src/features/inventory-movements/**/*',
+              from: './src/features/produtos/pages/**/*',
+            },
+            {
+              target: './src/features/inventory-movements/**/*',
+              from: './src/features/produtos/hooks/**/*',
+            },
+            {
+              target: './src/app/**/*',
+              from: './src/features/**/components/**/*',
+            },
+            {
+              target: './src/app/**/*',
+              from: './src/features/**/hooks/**/*',
+            },
+            {
+              target: './src/app/**/*',
+              from: './src/features/**/store/**/*',
+            },
+            {
+              target: './src/app/**/*',
+              from: './src/features/**/pages/**/*',
+            },
+          ],
+        },
+      ],
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: [
+                '@/shared/components/ui/Modal/index',
+                '@/shared/components/ui/Input/index',
+                '@/shared/components/ui/Input/index.tsx',
+                '@/shared/utils/cn.ts',
+              ],
+              message:
+                'Use @/shared path without /index or extension (e.g. @/shared/components/ui/Modal, @/shared/utils/cn).',
+            },
+          ],
+        },
+      ],
     },
   },
 ]

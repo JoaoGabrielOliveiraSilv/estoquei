@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import { Button } from '@/shared/components/ui/Button'
 import { Input } from '@/shared/components/ui/Input'
-import Modal from '@/shared/components/ui/Modal/index'
+import Modal from '@/shared/components/ui/Modal'
 import { ModalSection } from '@/shared/components/ui/ModalSection'
 import { Textarea } from '@/shared/components/ui/Textarea'
 import UploadImage from '@/shared/components/ui/UploadImage'

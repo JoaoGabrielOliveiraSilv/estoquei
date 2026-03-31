@@ -1,11 +1,11 @@
 import { Search } from 'lucide-react'
 
-import { Input } from '@/shared/components/ui/Input/index.tsx'
-import { cn } from '@/shared/utils/cn.ts'
+import { Input } from '@/shared/components/ui/Input'
+import { cn } from '@/shared/utils/cn'
 
-import ProductCard from '../ProductCard/index.tsx'
+import ProductCard from '../ProductCard'
 
-import type { IProductTableProps } from './types.ts'
+import type { IProductTableProps } from './types'
 
 export default function ProductTable({ products, onRequestDeleteProduct, ...props }: IProductTableProps) {
   return (
