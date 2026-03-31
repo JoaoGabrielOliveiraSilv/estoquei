@@ -1,5 +1,7 @@
 import { LayersPlus } from "lucide-react";
 
+import type { InventoryMovement } from './shared/types/inventory-movement'
+
 export const mockProductStats = {
   total: {
     quantity: 100,
@@ -102,5 +104,36 @@ export const mockProducts = [
     description: "Descrição do produto 10",
     quantity: 100,
     status: "normal" as const,
+  },
+]
+
+export const mockInventoryMovements: InventoryMovement[] = [
+  {
+    id: 1,
+    type: 'inbound',
+    quantity: 10,
+    counterPartyName: 'Cliente 1',
+    date: '2026-01-01',
+  },
+  {
+    id: 2,
+    type: 'outbound',
+    quantity: 20,
+    counterPartyName: 'Cliente 2',
+    date: '2026-01-02',
+  },
+  {
+    id: 3,
+    type: 'inbound',
+    quantity: 30,
+    counterPartyName: 'Cliente 3',
+    date: '2026-01-03',
+  },
+  {
+    id: 4,
+    type: 'outbound',
+    quantity: 40,
+    counterPartyName: 'Cliente 4',
+    date: '2026-01-04',
   },
 ]

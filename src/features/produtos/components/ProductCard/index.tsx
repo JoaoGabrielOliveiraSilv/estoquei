@@ -2,8 +2,10 @@ import { LayersPlus, RotateCcw, SquarePen, Trash } from 'lucide-react'
 import { useCallback } from 'react'
 
 import { useProductModal } from '@/features/produtos/hooks/use-product-modal'
+import { mockInventoryMovements } from '@/mock-data'
 import { Button } from '@/shared/components/ui/Button'
 import { DotInfo } from '@/shared/components/ui/DotInfo'
+import { useHistoryMovementModal } from '@/shared/hooks/use-history-movement-modal'
 import { useNewInventoryMovementModal } from '@/shared/hooks/use-new-inventory-movement-modal'
 import { cn } from '@/shared/utils/cn'
 
@@ -14,6 +16,7 @@ import type { IProductCardProps } from './types'
 export default function ProductCard({ product, gridProps, containerClassName }: IProductCardProps) {
   const { openNewInventoryMovementModal } = useNewInventoryMovementModal()
   const { open: openProductModal } = useProductModal()
+  const { openHistoryMovementModal } = useHistoryMovementModal()
   const { quantity: quantityStyle, status: statusStyle } = variants[product.status]
 
   const handleNewMovementClick = useCallback(() => {
@@ -23,6 +26,10 @@ export default function ProductCard({ product, gridProps, containerClassName }: 
   const handleEditProductClick = useCallback(() => {
     openProductModal(product)
   }, [product, openProductModal])
+
+  const handleHistoryMovementClick = useCallback(() => {
+    openHistoryMovementModal(product, mockInventoryMovements)
+  }, [product, openHistoryMovementModal])
 
   return (
     <div
@@ -69,7 +76,7 @@ export default function ProductCard({ product, gridProps, containerClassName }: 
           <Button variant="ghost" size="icon" onClick={handleNewMovementClick}>
             <LayersPlus size={16} />
           </Button>
-          <Button variant="ghost" size="icon">
+          <Button variant="ghost" size="icon" onClick={handleHistoryMovementClick}>
             <RotateCcw size={16} />
           </Button>
           <Button variant="ghost" size="icon" onClick={handleEditProductClick}>
