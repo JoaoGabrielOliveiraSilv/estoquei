@@ -1,6 +1,9 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ArrowDown, ArrowUp, LayersPlus } from 'lucide-react'
 import { useCallback, useState } from 'react'
 
+import { getApiErrorMessage } from '@/shared/api/errors'
+import { createMovement } from '@/shared/api/movements-api'
 import { Button } from '@/shared/components/ui/Button'
 import { Input } from '@/shared/components/ui/Input'
 import Modal from '@/shared/components/ui/Modal'
@@ -10,25 +13,72 @@ import { useNewInventoryMovementModal } from '../../hooks/use-new-inventory-move
 
 import type { INewMovementsModalProps } from './types'
 
+function todayIsoDate(): string {
+  return new Date().toISOString().slice(0, 10)
+}
+
 export default function NewInventoryMovementsModal({
   open,
   onClose,
   onSubmit,
 }: INewMovementsModalProps) {
+  const queryClient = useQueryClient()
   const [movementType, setMovementType] = useState<'outbound' | 'inbound'>('inbound')
+  const [quantityInput, setQuantityInput] = useState('')
+  const [counterPartyName, setCounterPartyName] = useState('')
+  const [formError, setFormError] = useState<string | null>(null)
+
   const { closeNewInventoryMovementModal, productToMove: product } = useNewInventoryMovementModal()
   const counterparty = movementType === 'inbound' ? 'fornecedor' : 'cliente'
 
+  const resetForm = useCallback(() => {
+    setMovementType('inbound')
+    setQuantityInput('')
+    setCounterPartyName('')
+    setFormError(null)
+  }, [])
+
   const handleClose = useCallback(() => {
+    resetForm()
     closeNewInventoryMovementModal()
     onClose?.()
-  }, [closeNewInventoryMovementModal, onClose])
+  }, [closeNewInventoryMovementModal, onClose, resetForm])
+
+  const movementMutation = useMutation({
+    mutationFn: async () => {
+      const qty = Number.parseInt(quantityInput, 10)
+      if (!Number.isFinite(qty) || qty < 1) {
+        throw new Error('Informe uma quantidade válida.')
+      }
+      const name = counterPartyName.trim()
+      if (!name) {
+        throw new Error(`Informe o nome do ${counterparty}.`)
+      }
+      if (movementType === 'outbound' && qty > product.quantity) {
+        throw new Error('Quantidade maior que o estoque disponível.')
+      }
+      return createMovement(product.id, {
+        type: movementType,
+        quantity: qty,
+        counterPartyName: name,
+        date: todayIsoDate(),
+      })
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['products'] })
+      queryClient.invalidateQueries({ queryKey: ['movements', product.id] })
+      onSubmit?.()
+      handleClose()
+    },
+    onError: (err) => {
+      setFormError(getApiErrorMessage(err))
+    },
+  })
 
   const handleSubmit = useCallback(() => {
-    onSubmit?.()
-    closeNewInventoryMovementModal()
-    onClose?.()
-  }, [closeNewInventoryMovementModal, onSubmit, onClose])
+    setFormError(null)
+    movementMutation.mutate()
+  }, [movementMutation])
 
   if (!open || !product.id) return null
 
@@ -42,7 +92,7 @@ export default function NewInventoryMovementsModal({
           <Button variant="ghost" onClick={handleClose}>
             Cancelar
           </Button>
-          <Button variant="accent" onClick={handleSubmit}>
+          <Button variant="accent" onClick={handleSubmit} disabled={movementMutation.isPending}>
             <LayersPlus size={16} />
             Registrar movimentação
           </Button>
@@ -50,6 +100,7 @@ export default function NewInventoryMovementsModal({
       }
     >
       <form className="flex flex-col gap-4" onSubmit={(e) => e.preventDefault()}>
+        {formError ? <p className="text-estoquei-danger text-sm">{formError}</p> : null}
         <ModalSection title="Tipo" className="w-full">
           <div className="flex w-full items-center justify-between gap-2">
             <Button
@@ -82,6 +133,8 @@ export default function NewInventoryMovementsModal({
               max={movementType === 'outbound' ? product.quantity : undefined}
               inputMode="numeric"
               placeholder="Digite a quantidade"
+              value={quantityInput}
+              onChange={(e) => setQuantityInput(e.target.value)}
             />
           </ModalSection>
           <ModalSection title="Atual" className="w-full">
@@ -95,7 +148,12 @@ export default function NewInventoryMovementsModal({
         </div>
 
         <ModalSection title={counterparty} className="w-full">
-          <Input type="text" placeholder={`Digite o nome do ${counterparty}`} />
+          <Input
+            type="text"
+            placeholder={`Digite o nome do ${counterparty}`}
+            value={counterPartyName}
+            onChange={(e) => setCounterPartyName(e.target.value)}
+          />
         </ModalSection>
       </form>
     </Modal>

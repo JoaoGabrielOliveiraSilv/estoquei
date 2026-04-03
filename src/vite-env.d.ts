@@ -1,2 +1,10 @@
 /// <reference types="vite/client" />
-// Vite type declarations available to frontend modules.
+
+interface ImportMetaEnv {
+  readonly VITE_API_URL: string
+  readonly VITE_API_JWT: string
+}
+
+interface ImportMeta {
+  readonly env: ImportMetaEnv
+}
