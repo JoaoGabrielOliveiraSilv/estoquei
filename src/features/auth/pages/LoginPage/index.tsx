@@ -7,6 +7,8 @@ import { Button } from '@/shared/components/ui/Button'
 import { Input } from '@/shared/components/ui/Input'
 import { setToken } from '@/shared/utils/auth'
 
+const ERROR_ID = 'login-error'
+
 export default function LoginPage() {
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
@@ -31,7 +33,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-estoquei-bg flex items-center justify-center p-4">
+    <main className="min-h-screen bg-estoquei-bg flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center gap-2 mb-8">
           <div className="w-10 h-10 bg-estoquei-accent rounded-lg flex items-center justify-center">
@@ -46,7 +48,7 @@ export default function LoginPage() {
           className="bg-estoquei-bg2 border border-estoquei-border rounded-lg p-6 flex flex-col gap-4"
         >
           {error && (
-            <p role="alert" className="text-estoquei-danger text-sm">
+            <p id={ERROR_ID} role="alert" className="text-estoquei-danger text-sm">
               {error}
             </p>
           )}
@@ -60,6 +62,8 @@ export default function LoginPage() {
               type="text"
               placeholder="Digite seu usuário"
               autoComplete="username"
+              aria-invalid={!!error || undefined}
+              aria-describedby={error ? ERROR_ID : undefined}
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -74,6 +78,8 @@ export default function LoginPage() {
               type="password"
               placeholder="Digite sua senha"
               autoComplete="current-password"
+              aria-invalid={!!error || undefined}
+              aria-describedby={error ? ERROR_ID : undefined}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -89,6 +95,6 @@ export default function LoginPage() {
           </Button>
         </form>
       </div>
-    </div>
+    </main>
   )
 }
