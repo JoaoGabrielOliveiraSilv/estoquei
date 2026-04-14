@@ -2,13 +2,10 @@ import { Package } from 'lucide-react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { login } from '@/shared/api/auth-api'
 import { Button } from '@/shared/components/ui/Button'
 import { Input } from '@/shared/components/ui/Input'
 import { setToken } from '@/shared/utils/auth'
-import { generateToken } from '@/shared/utils/jwt'
-
-const VALID_USERNAME = import.meta.env.VITE_LOGIN_USERNAME ?? ''
-const VALID_PASSWORD = import.meta.env.VITE_LOGIN_PASSWORD ?? ''
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -20,19 +17,14 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError(null)
-
-    if (username !== VALID_USERNAME || password !== VALID_PASSWORD) {
-      setError('Usuário ou senha inválidos.')
-      return
-    }
-
     setLoading(true)
+
     try {
-      const token = await generateToken()
+      const { token } = await login(username, password)
       setToken(token)
       navigate('/', { replace: true })
     } catch {
-      setError('Erro ao gerar sessão. Tente novamente.')
+      setError('Usuário ou senha inválidos.')
     } finally {
       setLoading(false)
     }
