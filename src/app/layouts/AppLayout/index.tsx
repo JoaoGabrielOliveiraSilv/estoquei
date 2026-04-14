@@ -33,8 +33,6 @@ export function AppLayout({ headerTitle }: IAppLayoutProps) {
       <MobileFooter items={MENU_ITEMS} />
 
       <div className="flex flex-col flex-1 overflow-hidden">
-        <PageHeader title={headerTitle} countItems={10} />
-
         <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>

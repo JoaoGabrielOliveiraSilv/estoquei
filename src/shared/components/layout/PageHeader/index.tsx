@@ -21,7 +21,7 @@ export default function PageHeader({ title, countItems, ...props }: IPageHeaderP
       <span className={
         cn(
             'bg-estoquei-bg3 text-estoquei-text3',
-            'px-2 py-[2px] text-[10px] ',
+            'px-2 py-[2px] text-sm font-medium ',
             'rounded-full border border-estoquei-border'
         )
       }>{countItems}</span>

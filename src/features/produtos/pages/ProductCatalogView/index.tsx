@@ -5,6 +5,7 @@ import ProductStats from '../../components/ProductStats'
 import ProductTable from '../../components/ProductTable'
 
 import type { IProductCatalogViewProps } from './types'
+import PageHeader from '@/shared/components/layout/PageHeader'
 
 export default function ProductCatalogView({
   products,
@@ -19,6 +20,7 @@ export default function ProductCatalogView({
 }: IProductCatalogViewProps) {
   return (
     <section className="p-4 bg-estoquei-bg w-full min-h-screen mb-20" {...sectionProps}>
+      <PageHeader title="Produtos" countItems={productStats.total.quantityProducts} />
       <ProductStats
         total={productStats.total}
         lowStock={productStats.lowStock}

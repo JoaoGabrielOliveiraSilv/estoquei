@@ -3,6 +3,7 @@ import { DotInfo } from '@/shared/components/ui/DotInfo'
 import type { IProductStatsProps } from './types'
 
 export default function ProductStats({ total, lowStock, outOfStockQuantity }: IProductStatsProps) {
+  console.log('total', lowStock)
   return (
     <div className="py-4 flex gap-[6px] justify-between">
       <div className="flex flex-col bg-estoquei-bg2 rounded-lg py-[14px] px-3 w-full border border-estoquei-border">
