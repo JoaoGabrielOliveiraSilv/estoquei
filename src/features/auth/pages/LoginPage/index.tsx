@@ -20,7 +20,7 @@ export default function LoginPage() {
     setLoading(true)
 
     try {
-      const { token } = await login(username, password)
+      const token = await login(username, password)
       setToken(token)
       navigate('/', { replace: true })
     } catch {

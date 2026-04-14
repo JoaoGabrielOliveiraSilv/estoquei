@@ -1,6 +1,6 @@
 import { api } from './client'
 
-export async function login(username: string, password: string): Promise<{ token: string }> {
-  const { data } = await api.post<{ token: string }>('/auth/login', { username, password })
-  return data
+export async function login(username: string, password: string): Promise<string> {
+  const { data } = await api.post<{ data: { token: string } }>('/auth/login', { username, password })
+  return data.data.token
 }
