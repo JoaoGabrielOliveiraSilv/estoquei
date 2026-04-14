@@ -110,7 +110,7 @@ function ProductModalBody({ product, onClose }: { product?: Product; onClose: ()
               'Salvar'
             ) : (
               <>
-                <Plus size={16} />
+                <Plus size={16} aria-hidden />
                 Criar produto
               </>
             )}
@@ -128,9 +128,11 @@ function ProductModalBody({ product, onClose }: { product?: Product; onClose: ()
                 variant={selectedIconItem === iconKey ? 'accent' : 'ghost'}
                 size="icon"
                 className="w-[38px] h-[38px] text-[28px]"
+                aria-label={iconItem.name}
+                aria-pressed={selectedIconItem === iconKey}
                 onClick={() => handleIconItemClick(iconKey as ProductIconItem)}
               >
-                {iconItem.emoji}
+                <span aria-hidden="true">{iconItem.emoji}</span>
               </Button>
             ))}
           </div>
@@ -141,6 +143,7 @@ function ProductModalBody({ product, onClose }: { product?: Product; onClose: ()
             withIcon={false}
             placeholder="Digite o nome do produto"
             className={cn('text-[15px]')}
+            aria-label="Nome do produto"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
@@ -151,6 +154,7 @@ function ProductModalBody({ product, onClose }: { product?: Product; onClose: ()
             rows={4}
             placeholder="Digite a descrição do produto..."
             className={cn('text-[15px]')}
+            aria-label="Descrição do produto"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />

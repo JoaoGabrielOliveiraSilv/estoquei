@@ -21,6 +21,7 @@ export function Button({
     <button
       type={type}
       disabled={isDisabled}
+      aria-busy={loading || undefined}
       className={cn(buttonVariants({ variant, size }), className)}
       {...rest}
     >

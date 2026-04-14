@@ -70,6 +70,7 @@ export default function HistoryMovementsModal({ onClose }: IHistoryMovementsModa
                 )}
               >
                 <span
+                  aria-label={isInbound ? 'Entrada' : 'Saída'}
                   className={cn(
                     isInbound
                       ? 'bg-estoquei-green/10 border border-estoquei-green/35 text-estoquei-green'
@@ -77,7 +78,7 @@ export default function HistoryMovementsModal({ onClose }: IHistoryMovementsModa
                     'w-[30px] h-[30px] flex items-center justify-center rounded-md'
                   )}
                 >
-                  {isInbound ? <ArrowUp size={16} /> : <ArrowDown size={16} />}
+                  {isInbound ? <ArrowUp size={16} aria-hidden /> : <ArrowDown size={16} aria-hidden />}
                 </span>
                 <div className="flex flex-col">
                   <span className="text-estoquei-text font-medium text-[13px]">

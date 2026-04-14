@@ -20,8 +20,9 @@ export default function ProductTable({
         <Search
           size={15}
           className="absolute left-3 top-1/2 -translate-y-1/2 text-estoquei-text3 pointer-events-none"
+          aria-hidden="true"
         />
-        <Input placeholder="Buscar produto..." withIcon />
+        <Input placeholder="Buscar produto..." withIcon aria-label="Buscar produto" />
       </div>
 
       <div

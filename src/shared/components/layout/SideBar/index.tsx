@@ -30,6 +30,7 @@ export default function Sidebar({ items, className, ...props }: ISideBarProps) {
           variant="ghost"
           size="icon"
           onClick={item.onClick}
+          aria-label={item.label}
           className={cn(
             'flex items-center justify-center lg:items-start lg:justify-start',
             'p-3 hover:bg-estoquei-bg3 rounded-md',

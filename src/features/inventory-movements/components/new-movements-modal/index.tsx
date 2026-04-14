@@ -93,7 +93,7 @@ export default function NewInventoryMovementsModal({
             Cancelar
           </Button>
           <Button variant="accent" onClick={handleSubmit} disabled={movementMutation.isPending}>
-            <LayersPlus size={16} />
+            <LayersPlus size={16} aria-hidden />
             Registrar movimentação
           </Button>
         </div>
@@ -107,18 +107,20 @@ export default function NewInventoryMovementsModal({
               variant={movementType === 'inbound' ? 'green-selected' : 'ghost'}
               className="w-full"
               type="button"
+              aria-pressed={movementType === 'inbound'}
               onClick={() => setMovementType('inbound')}
             >
-              <ArrowUp size={16} />
+              <ArrowUp size={16} aria-hidden />
               Entrada
             </Button>
             <Button
               variant={movementType === 'outbound' ? 'red-selected' : 'ghost'}
               className="w-full"
               type="button"
+              aria-pressed={movementType === 'outbound'}
               onClick={() => setMovementType('outbound')}
             >
-              <ArrowDown size={16} />
+              <ArrowDown size={16} aria-hidden />
               Saída
             </Button>
           </div>
@@ -133,6 +135,7 @@ export default function NewInventoryMovementsModal({
               max={movementType === 'outbound' ? product.quantity : undefined}
               inputMode="numeric"
               placeholder="Digite a quantidade"
+              aria-label="Quantidade"
               value={quantityInput}
               onChange={(e) => setQuantityInput(e.target.value)}
             />
@@ -141,6 +144,7 @@ export default function NewInventoryMovementsModal({
             <Input
               type="number"
               className="text-estoquei-text3"
+              aria-label="Estoque atual"
               value={product.quantity}
               disabled
             />
@@ -151,6 +155,7 @@ export default function NewInventoryMovementsModal({
           <Input
             type="text"
             placeholder={`Digite o nome do ${counterparty}`}
+            aria-label={`Nome do ${counterparty}`}
             value={counterPartyName}
             onChange={(e) => setCounterPartyName(e.target.value)}
           />

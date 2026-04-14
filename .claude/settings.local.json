@@ -4,7 +4,10 @@
       "Bash(git commit:*)",
       "Bash(npm install:*)",
       "Bash(npm test:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(node -e \"const pkg = require\\('./node_modules/focus-trap-react/package.json'\\); console.log\\(pkg.version, pkg.main, pkg.module, pkg.exports\\)\")",
+      "Bash(node -e \"const m = require\\('focus-trap-react'\\); console.log\\(Object.keys\\(m\\)\\)\")",
+      "Bash(node -e \"require\\('focus-trap'\\)\")"
     ]
   }
 }

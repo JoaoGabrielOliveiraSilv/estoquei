@@ -79,17 +79,17 @@ export default function ProductCard({
         </DotInfo>
 
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="icon" onClick={handleNewMovementClick}>
-            <LayersPlus size={16} />
+          <Button variant="ghost" size="icon" onClick={handleNewMovementClick} aria-label="Nova movimentação">
+            <LayersPlus size={16} aria-hidden />
           </Button>
-          <Button variant="ghost" size="icon" onClick={handleHistoryMovementClick}>
-            <RotateCcw size={16} />
+          <Button variant="ghost" size="icon" onClick={handleHistoryMovementClick} aria-label="Ver histórico">
+            <RotateCcw size={16} aria-hidden />
           </Button>
-          <Button variant="ghost" size="icon" onClick={handleEditProductClick}>
-            <SquarePen size={16} />
+          <Button variant="ghost" size="icon" onClick={handleEditProductClick} aria-label="Editar produto">
+            <SquarePen size={16} aria-hidden />
           </Button>
           <Button variant="ghost" size="icon" onClick={handleDeleteClick} aria-label="Excluir produto">
-            <Trash size={16} />
+            <Trash size={16} aria-hidden />
           </Button>
         </div>
       </div>

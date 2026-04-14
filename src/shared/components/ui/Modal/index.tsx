@@ -1,4 +1,6 @@
+import { FocusTrap } from 'focus-trap-react'
 import { X } from 'lucide-react'
+import { useId } from 'react'
 
 import { cn } from '@/shared/utils/cn'
 
@@ -7,6 +9,8 @@ import { Button } from '../Button'
 import type { IModalProps } from './types'
 
 export default function Modal({ open, title, children, footer, onClose, ...props }: IModalProps) {
+  const titleId = useId()
+
   if (!open) {
     return null
   }
@@ -22,39 +26,52 @@ export default function Modal({ open, title, children, footer, onClose, ...props
       {...props}
       onClick={(e) => e.target === e.currentTarget && onClose?.()}
     >
-      <div
-        className={cn(
-          'flex flex-col bg-estoquei-bg2',
-          'border border-estoquei-border',
-          'rounded-t-lg md:rounded-lg',
-          'overflow-y-auto',
-          'w-full max-w-md',
-          'text-estoquei-text'
-        )}
+      <FocusTrap
+        focusTrapOptions={{
+          escapeDeactivates: false,
+          clickOutsideDeactivates: false,
+          allowOutsideClick: true,
+        }}
       >
         <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby={title ? titleId : undefined}
+          onKeyDown={(e) => e.key === 'Escape' && onClose?.()}
           className={cn(
-            'flex flex-1 items-center justify-between',
-            'border-b border-estoquei-border',
-            'w-full',
-            'px-4 pt-4 pb-3'
+            'flex flex-col bg-estoquei-bg2',
+            'border border-estoquei-border',
+            'rounded-t-lg md:rounded-lg',
+            'overflow-y-auto',
+            'w-full max-w-md',
+            'text-estoquei-text'
           )}
         >
-          <h2 className="text-estoquei-text text-[15px]">{title}</h2>
-          <div>
-            <Button
-              className="w-7 h-7 rounded-sm border border-estoquei-border flex items-center justify-center bg-estoquei-bg"
-              variant="ghost"
-              size="icon"
-              onClick={onClose}
-            >
-              <X size={14} />
-            </Button>
+          <div
+            className={cn(
+              'flex flex-1 items-center justify-between',
+              'border-b border-estoquei-border',
+              'w-full',
+              'px-4 pt-4 pb-3'
+            )}
+          >
+            <h2 id={titleId} className="text-estoquei-text text-[15px]">{title}</h2>
+            <div>
+              <Button
+                className="w-7 h-7 rounded-sm border border-estoquei-border flex items-center justify-center bg-estoquei-bg"
+                variant="ghost"
+                size="icon"
+                onClick={onClose}
+                aria-label="Fechar"
+              >
+                <X size={14} aria-hidden />
+              </Button>
+            </div>
           </div>
+          {children && <div className={cn('flex-auto', 'p-4', 'w-full')}>{children}</div>}
+          {footer && <div className={cn('flex-1', 'p-4', 'w-full', 'border-t border-estoquei-border')}>{footer}</div>}
         </div>
-        {children && <div className={cn('flex-auto', 'p-4', 'w-full')}>{children}</div>}
-        {footer && <div className={cn('flex-1', 'p-4', 'w-full', 'border-t border-estoquei-border')}>{footer}</div>}
-      </div>
+      </FocusTrap>
     </div>
   )
 }
