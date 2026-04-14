@@ -1,3 +1,4 @@
+import PageHeader from '@/shared/components/layout/PageHeader'
 import { Button } from '@/shared/components/ui/Button'
 import Modal from '@/shared/components/ui/Modal'
 
@@ -5,7 +6,6 @@ import ProductStats from '../../components/ProductStats'
 import ProductTable from '../../components/ProductTable'
 
 import type { IProductCatalogViewProps } from './types'
-import PageHeader from '@/shared/components/layout/PageHeader'
 
 export default function ProductCatalogView({
   products,
