@@ -22,6 +22,15 @@ vi.mock('@/shared/api/products-api', () => ({
 }))
 
 describe('App', () => {
+  beforeEach(() => {
+    // ProtectedRoute exige token no localStorage para não redirecionar ao /login
+    localStorage.setItem('estoquei_token', 'test-token')
+  })
+
+  afterEach(() => {
+    localStorage.clear()
+  })
+
   it('renders home route content', async () => {
     render(
       <AppProviders>

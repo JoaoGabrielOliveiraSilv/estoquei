@@ -1,19 +1,26 @@
-import { PackagePlus } from 'lucide-react'
+import { LogOut, PackagePlus } from 'lucide-react'
 import { useCallback, useMemo } from 'react'
-import { Outlet } from 'react-router'
+import { Outlet, useNavigate } from 'react-router'
 
 import { useProductModal } from '@/features/produtos'
 import MobileFooter from '@/shared/components/layout/MobileFooter'
 import SideBar from '@/shared/components/layout/SideBar'
+import { clearToken } from '@/shared/utils/auth'
 
 import type { IAppLayoutProps } from './types'
 
 export function AppLayout({ headerTitle: _headerTitle }: IAppLayoutProps) {
   const { open: openProductModal } = useProductModal()
+  const navigate = useNavigate()
 
   const handleNewProductModalOpen = useCallback(() => {
     openProductModal()
   }, [openProductModal])
+
+  const handleLogout = useCallback(() => {
+    clearToken()
+    navigate('/login', { replace: true })
+  }, [navigate])
 
   const MENU_ITEMS = useMemo(
     () => [
@@ -22,8 +29,13 @@ export function AppLayout({ headerTitle: _headerTitle }: IAppLayoutProps) {
         icon: PackagePlus,
         onClick: handleNewProductModalOpen,
       },
+      {
+        label: 'Sair',
+        icon: LogOut,
+        onClick: handleLogout,
+      },
     ],
-    [handleNewProductModalOpen]
+    [handleNewProductModalOpen, handleLogout]
   )
 
   return (
