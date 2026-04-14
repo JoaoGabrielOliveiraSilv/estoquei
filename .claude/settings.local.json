@@ -8,7 +8,8 @@
       "Bash(node -e \"const pkg = require\\('./node_modules/focus-trap-react/package.json'\\); console.log\\(pkg.version, pkg.main, pkg.module, pkg.exports\\)\")",
       "Bash(node -e \"const m = require\\('focus-trap-react'\\); console.log\\(Object.keys\\(m\\)\\)\")",
       "Bash(node -e \"require\\('focus-trap'\\)\")",
-      "Bash(npm uninstall:*)"
+      "Bash(npm uninstall:*)",
+      "Bash(cat src/scripts/*)"
     ]
   }
 }
