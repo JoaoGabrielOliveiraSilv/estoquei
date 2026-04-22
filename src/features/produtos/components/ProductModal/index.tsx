@@ -9,7 +9,6 @@ import { Input } from '@/shared/components/ui/Input'
 import Modal from '@/shared/components/ui/Modal'
 import { ModalSection } from '@/shared/components/ui/ModalSection'
 import { Textarea } from '@/shared/components/ui/Textarea'
-import UploadImage from '@/shared/components/ui/UploadImage'
 import type { Product } from '@/shared/types/product'
 import { PRODUCT_ICON_ITEMS, type ProductIconItem } from '@/shared/types/product-icon'
 import { cn } from '@/shared/utils/cn'
@@ -41,7 +40,6 @@ function ProductModalBody({ product, onClose }: { product?: Product; onClose: ()
       createProduct({
         name: name.trim(),
         description: description.trim() || null,
-        imageUrl: null,
         emoji: emojiChar,
         quantity: 0,
         status: 'normal',
@@ -160,9 +158,6 @@ function ProductModalBody({ product, onClose }: { product?: Product; onClose: ()
           />
         </ModalSection>
 
-        <ModalSection title="Imagem">
-          <UploadImage />
-        </ModalSection>
       </form>
     </Modal>
   )
