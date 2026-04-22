@@ -4,7 +4,6 @@ export type ApiProduct = {
   id: string
   name: string
   description: string | null
-  imageUrl: string | null
   emoji: string
   quantity: number
   status: ProductCardStatus
@@ -30,7 +29,6 @@ export type ApiEnvelope<T> = {
 export type CreateProductBody = {
   name: string
   description?: string | null
-  imageUrl?: string | null
   emoji: string
   quantity?: number
   status?: ProductCardStatus
